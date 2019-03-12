@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class Token {
     private String token;
+    private boolean rememberMe;
 
     public boolean readToken() {
         try {
@@ -18,6 +19,7 @@ public class Token {
             JSONObject json = (JSONObject) parser.parse(new FileReader("token.json"));
 
             token = String.valueOf(json.get("token"));
+            rememberMe = Boolean.valueOf(String.valueOf(json.get("rememberMe")));
             return true;
         } catch (FileNotFoundException e) {
             return false;
@@ -30,6 +32,7 @@ public class Token {
     public void saveToken() {
         JSONObject obj = new JSONObject();
         obj.put("token", token);
+        obj.put("rememberMe", rememberMe);
 
         try (FileWriter file = new FileWriter("token.json")) {
             file.write(obj.toJSONString());
@@ -45,8 +48,17 @@ public class Token {
         token = encodeMD5(email + ": " + timeStamp);
     }
 
+    public void setRememberMe(boolean remember) {
+        System.out.println("Remember Me: " + remember);
+        rememberMe = remember;
+    }
+
     public String getToken() {
         return token;
+    }
+
+    public boolean getRememberMe() {
+        return rememberMe;
     }
 
     public void deleteToken() {
@@ -80,6 +92,7 @@ public class Token {
     public static void main(String[] args) {
         Token t = new Token();
         //t.generateToken("admin");
+        //t.setRememberMe(true);
         //t.saveToken();
         t.readToken();
 
