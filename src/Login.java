@@ -33,7 +33,7 @@ public class Login extends JFrame {
 	private JPasswordField txtFieldPassword;
 	private User user = new User();
 
-	/**aaaaaaaa
+	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
