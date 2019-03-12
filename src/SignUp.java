@@ -197,7 +197,7 @@ public class SignUp extends JFrame {
 		txtFieldPassword = new JPasswordField();
 		txtFieldPassword.setColumns(5);
 		txtFieldPassword.setBounds(442, 236, 302, 29);
-		txtFieldPassword.setToolTipText("The password must more than 8 digits and in alphanumeric.");
+		txtFieldPassword.setToolTipText("The password must more than 8 characters.");
 		contentPane.add(txtFieldPassword);
 		txtFieldPassword.addFocusListener(new FocusListener() {
 			@Override
@@ -208,7 +208,7 @@ public class SignUp extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtFieldPassword.getPassword().length < 8) {
-					JOptionPane.showMessageDialog(new Frame(), "The password must more than 8 digits and in alphanumeric !");
+					JOptionPane.showMessageDialog(new Frame(), "The password must more than 8 characters!");
 				}
 			}
 		});
