@@ -1,3 +1,5 @@
+import sun.applet.Main;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -102,7 +104,10 @@ public class Login extends JFrame {
                         t.saveToken();
 
                         dispose(); // close current window
-                        System.exit(0);
+
+						// go to MainPage
+						new MainPage().setVisible(true);
+                        //System.exit(0);
                     } else {
                         // wrong password
                         JOptionPane.showMessageDialog(new Frame(), "The email or password you entered is incorrect !");
@@ -167,7 +172,7 @@ public class Login extends JFrame {
 		btnSignUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SignUp();
+                new SignUp().setVisible(true);
             }
         });
 		
@@ -181,8 +186,7 @@ public class Login extends JFrame {
 		btnForgotPassword.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ForgotPassword fp = new ForgotPassword();
-                fp.setVisible(true);
+                new ForgotPassword().setVisible(true);
             }
         });
 		

@@ -12,14 +12,18 @@ import java.util.Date;
 public class Token {
     private String token;
 
-    public void readToken() {
+    public boolean readToken() {
         try {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(new FileReader("token.json"));
 
             token = String.valueOf(json.get("token"));
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
         } catch (ParseException | IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -75,10 +79,10 @@ public class Token {
 
     public static void main(String[] args) {
         Token t = new Token();
-        t.generateToken("admin");
-        t.saveToken();
+        //t.generateToken("admin");
+        //t.saveToken();
         t.readToken();
 
-        System.out.println("GET TOKEN: " + t.getToken());
+        System.out.println("GET TOKEN: " + t.readToken());
     }
 }
