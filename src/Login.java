@@ -148,7 +148,7 @@ public class Login extends JFrame {
 			}
 		});
 		
-		JLabel lblMail = new JLabel("Mail");
+		JLabel lblMail = new JLabel("Email");
 		lblMail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblMail.setBounds(457, 115, 125, 20);
 		contentPane.add(lblMail);
@@ -162,6 +162,7 @@ public class Login extends JFrame {
 		checkBoxRemember.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		checkBoxRemember.setBackground(Color.WHITE);
 		checkBoxRemember.setBounds(457, 248, 157, 29);
+		checkBoxRemember.setSelected(true);
 		contentPane.add(checkBoxRemember);
 		
 		JButton btnSignUp = new JButton("Sign up");
