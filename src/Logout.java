@@ -86,7 +86,7 @@ public class Logout extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				dispose();
 			}
 		});
 
