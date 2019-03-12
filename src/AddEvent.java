@@ -3,32 +3,22 @@ import com.github.lgooddatepicker.components.DatePicker;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Panel;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Frame;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
 import java.awt.TextArea;
 import java.awt.Choice;
-import javax.swing.JTextPane;
 import java.awt.List;
-import javax.swing.JEditorPane;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
 import java.awt.Button;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Objects;
@@ -144,10 +134,6 @@ public class AddEvent extends JFrame {
         lblTime.setBounds(424, 211, 47, 20);
         contentPane.add(lblTime);
 
-        // Create a date picker, and add it to the form.
-        DatePicker datePicker1 = new DatePicker();
-        contentPane.add(datePicker1);
-
         JLabel lblDate = new JLabel("Date");
         lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblDate.setBounds(424, 258, 47, 20);
@@ -245,9 +231,17 @@ public class AddEvent extends JFrame {
         btnAdd.setBackground(new Color(255, 182, 193));
         btnAdd.setBounds(586, 540, 336, 29);
         contentPane.add(btnAdd);
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (txtName.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Event name is required !");
+                }
+            }
+        });
 
         JOptionPane.showMessageDialog(new Frame(), "Add event successful !");
-        JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Event name is required !");
+
         JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Time is required !");
         JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Date is required !");
     }

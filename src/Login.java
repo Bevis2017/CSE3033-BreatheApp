@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
@@ -206,7 +208,7 @@ public class Login extends JFrame {
                 char[] password = field.getPassword();
 
                 if (password.length < 1) {
-                    JOptionPane.showMessageDialog(new Frame(), "Please enter a password!");
+                    JOptionPane.showMessageDialog(new Frame(), "Please enter a password!", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
