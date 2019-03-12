@@ -93,38 +93,6 @@ public class Login extends JFrame {
 		label.setIcon(new ImageIcon(Login.class.getResource("/image/org.stopbreathethink.app[1].png")));
 		panel.add(label);
 		
-		Button btnLogin = new Button("LOGIN");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			    if (txtFieldMail.getText().length() > 0 && String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
-                    // validate login info
-                    int loginId = user.login(txtFieldMail.getText(), String.valueOf(txtFieldPassword.getPassword()));
-                    if ( loginId > 0) {
-                        JOptionPane.showMessageDialog(new Frame(), "Login successful !");
-                        Token t = new Token();
-                        t.generateToken(txtFieldMail.getText());
-                        t.saveToken();
-
-                        dispose(); // close current window
-
-						// go to MainPage
-						new MainPage().setVisible(true);
-                        //System.exit(0);
-                    } else {
-                        // wrong password
-                        JOptionPane.showMessageDialog(new Frame(), "The email or password you entered is incorrect !");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(new Frame(), "Please enter email and password to login!");
-                }
-			}
-		});
-		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnLogin.setForeground(Color.WHITE);
-		btnLogin.setBackground(new Color(255, 182, 193));
-		btnLogin.setBounds(457, 324, 302, 41);
-		contentPane.add(btnLogin);
-		
 		txtFieldMail = new JTextField();
 		txtFieldMail.setBounds(457, 136, 302, 29);
 		contentPane.add(txtFieldMail);
@@ -164,6 +132,39 @@ public class Login extends JFrame {
 		checkBoxRemember.setBounds(457, 248, 157, 29);
 		checkBoxRemember.setSelected(true);
 		contentPane.add(checkBoxRemember);
+
+		Button btnLogin = new Button("LOGIN");
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnLogin.setForeground(Color.WHITE);
+		btnLogin.setBackground(new Color(255, 182, 193));
+		btnLogin.setBounds(457, 324, 302, 41);
+		contentPane.add(btnLogin);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (txtFieldMail.getText().length() > 0 && String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
+					// validate login info
+					int loginId = user.login(txtFieldMail.getText(), String.valueOf(txtFieldPassword.getPassword()));
+					if ( loginId > 0) {
+						JOptionPane.showMessageDialog(new Frame(), "Login successful !");
+						Token t = new Token();
+						t.generateToken(txtFieldMail.getText());
+						t.setRememberMe(checkBoxRemember.isSelected());
+						t.saveToken();
+
+						dispose(); // close current window
+
+						// go to MainPage
+						new MainPage().setVisible(true);
+						//System.exit(0);
+					} else {
+						// wrong password
+						JOptionPane.showMessageDialog(new Frame(), "The email or password you entered is incorrect !");
+					}
+				} else {
+					JOptionPane.showMessageDialog(new Frame(), "Please enter email and password to login!");
+				}
+			}
+		});
 		
 		JButton btnSignUp = new JButton("Sign up");
 		btnSignUp.setForeground(Color.BLUE);
