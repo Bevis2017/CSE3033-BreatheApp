@@ -1,3 +1,5 @@
+import com.mysql.cj.exceptions.CJCommunicationsException;
+
 import javax.jws.soap.SOAPBinding;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +25,8 @@ public class User {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Reconnecting ...");
+            db.reconnect();
         }
 
         return status;
@@ -39,6 +43,8 @@ public class User {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Reconnecting ...");
+            db.reconnect();
         }
 
         return status;
@@ -61,25 +67,25 @@ public class User {
         return status;
     }
 
-    public boolean login(String email, String pass) {
+    public int login(String email, String pass) {
         String query = "Select * FROM user WHERE email = '%s' AND password = '%s'";
         ResultSet rs = db.query(String.format(query, email, pass));
 
         System.out.println("EMAIL: " + email);
         System.out.println("PWD: " + pass);
 
-        boolean status = false;
+        int userId = -1;
 
         try {
             if (rs.next()) {
                 System.out.println("USER ID: " + rs.getString("id"));
-                status = true;
+                userId = rs.getInt("id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return status;
+        return userId;
     }
 
     public static void main(String[] args) {

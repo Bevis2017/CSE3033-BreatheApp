@@ -92,15 +92,24 @@ public class Login extends JFrame {
 		Button btnLogin = new Button("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// validate login info
-				if (user.login(txtFieldMail.getText(), String.valueOf(txtFieldPassword.getPassword()))) {
-					JOptionPane.showMessageDialog(new Frame(), "Login successful !");
+			    if (txtFieldMail.getText().length() > 0 && String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
+                    // validate login info
+                    int loginId = user.login(txtFieldMail.getText(), String.valueOf(txtFieldPassword.getPassword()));
+                    if ( loginId > 0) {
+                        JOptionPane.showMessageDialog(new Frame(), "Login successful !");
+                        Token t = new Token();
+                        t.generateToken(txtFieldMail.getText());
+                        t.saveToken();
 
-					dispose(); // close current window
-					System.exit(0);
-				} else {
-					JOptionPane.showMessageDialog(new Frame(), "The mail or password you entered is incorrect !");
-				}
+                        dispose(); // close current window
+                        System.exit(0);
+                    } else {
+                        // wrong password
+                        JOptionPane.showMessageDialog(new Frame(), "The email or password you entered is incorrect !");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(new Frame(), "Please enter email and password to login!");
+                }
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -121,14 +130,14 @@ public class Login extends JFrame {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (txtFieldMail.getText().length() > 0) {
-					User u = new User();
-					boolean available = u.isUserEmailAvailable(txtFieldMail.getText());
+			    // check email
+                if (txtFieldMail.getText().length() > 0) {
+                    boolean available = user.isUserEmailAvailable(txtFieldMail.getText());
 
-					if (available) {
-						JOptionPane.showMessageDialog(new Frame(), "Email not found!");
-					}
-				}
+                    if (available) {
+                        JOptionPane.showMessageDialog(new Frame(), "Email not found!");
+                    }
+                }
 			}
 		});
 		
@@ -155,6 +164,12 @@ public class Login extends JFrame {
 		btnSignUp.setBackground(Color.WHITE);
 		btnSignUp.setBounds(606, 372, 110, 29);
 		contentPane.add(btnSignUp);
+		btnSignUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SignUp();
+            }
+        });
 		
 		JButton btnForgotPassword = new JButton("Forgot Password?");
 		btnForgotPassword.setForeground(Color.BLUE);
@@ -163,6 +178,13 @@ public class Login extends JFrame {
 		btnForgotPassword.setBackground(Color.WHITE);
 		btnForgotPassword.setBounds(606, 248, 186, 29);
 		contentPane.add(btnForgotPassword);
+		btnForgotPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ForgotPassword fp = new ForgotPassword();
+                fp.setVisible(true);
+            }
+        });
 		
 		txtFieldPassword = new JPasswordField();
 		txtFieldPassword.setColumns(5);
