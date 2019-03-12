@@ -68,6 +68,16 @@ public class Logout extends JFrame {
 		btnOk.setBackground(new Color(255, 182, 193));
 		btnOk.setBounds(82, 136, 136, 29);
 		contentPane.add(btnOk);
+		btnOk.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Token token = new Token();
+				token.deleteToken();
+				JOptionPane.showMessageDialog(new Frame(), "Logout successful !", "Logout", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
+				System.exit(0);
+			}
+		});
 		
 		Button btnCancel = new Button("CANCEL");
 		btnCancel.setForeground(Color.WHITE);
@@ -75,8 +85,6 @@ public class Logout extends JFrame {
 		btnCancel.setBackground(new Color(255, 182, 193));
 		btnCancel.setBounds(260, 136, 136, 29);
 		contentPane.add(btnCancel);
-		
-		JOptionPane.showMessageDialog(new Frame(), "Logout sucessful !");
-		
+
 	}
 }
