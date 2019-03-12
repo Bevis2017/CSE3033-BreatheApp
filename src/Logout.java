@@ -30,14 +30,12 @@ public class Logout extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Logout frame = new Logout();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Logout frame = new Logout();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -47,7 +45,7 @@ public class Logout extends JFrame {
 	 */
 	public Logout() {
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -85,6 +83,12 @@ public class Logout extends JFrame {
 		btnCancel.setBackground(new Color(255, 182, 193));
 		btnCancel.setBounds(260, 136, 136, 29);
 		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 
 	}
 }
