@@ -34,7 +34,7 @@ public class MainPage extends JFrame {
 
 				try {
 					// check user detail
-					if (token.readToken()) {
+					if (token.readToken() && token.getRememberMe()) {
 						MainPage frame = new MainPage();
 						frame.setVisible(true);
 					} else {
@@ -71,6 +71,7 @@ public class MainPage extends JFrame {
 		JButton logoutBtn = new JButton("LOGOUT");
 		logoutBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new Logout().setVisible(true);
 			}
 		});
 		logoutBtn.setForeground(Color.WHITE);
