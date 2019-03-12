@@ -146,7 +146,7 @@ public class Login extends JFrame {
 			}
 		});
 		
-		JLabel lblMail = new JLabel("Email");
+		JLabel lblMail = new JLabel("Mail");
 		lblMail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblMail.setBounds(457, 115, 125, 20);
 		contentPane.add(lblMail);
