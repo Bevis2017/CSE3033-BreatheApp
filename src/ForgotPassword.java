@@ -47,7 +47,7 @@ public class ForgotPassword extends JFrame {
 	 */
 	public ForgotPassword() {
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
