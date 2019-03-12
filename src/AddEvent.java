@@ -29,6 +29,8 @@ public class AddEvent extends JFrame {
     private JTextField txtName;
     private JTextField txtLocation;
     private JTextField txtInvitees;
+    private JTextField textFieldTime;
+    private JTextField textFieldDate;
 
     /**
      * Launch the application.
@@ -91,7 +93,7 @@ public class AddEvent extends JFrame {
 
         JLabel lblName = new JLabel("Event Name");
         lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblName.setBounds(424, 70, 101, 20);
+        lblName.setBounds(424, 74, 101, 20);
         contentPane.add(lblName);
 
         JLabel label = new JLabel("*");
@@ -121,23 +123,33 @@ public class AddEvent extends JFrame {
 
         JLabel lblLocation = new JLabel("Location");
         lblLocation.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblLocation.setBounds(424, 164, 101, 20);
+        lblLocation.setBounds(424, 167, 101, 20);
         contentPane.add(lblLocation);
 
         txtLocation = new JTextField();
         txtLocation.setColumns(5);
-        txtLocation.setBounds(586, 164, 336, 29);
+        txtLocation.setBounds(586, 163, 336, 29);
         contentPane.add(txtLocation);
 
         JLabel lblTime = new JLabel("Time");
         lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblTime.setBounds(424, 211, 47, 20);
+        lblTime.setBounds(424, 216, 47, 20);
         contentPane.add(lblTime);
 
         JLabel lblDate = new JLabel("Date");
         lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblDate.setBounds(424, 258, 47, 20);
+        lblDate.setBounds(424, 260, 47, 20);
         contentPane.add(lblDate);
+
+        textFieldTime = new JTextField();
+        textFieldTime.setBounds(586, 214, 336, 25);
+        contentPane.add(textFieldTime);
+        textFieldTime.setColumns(10);
+
+        textFieldDate = new JTextField();
+        textFieldDate.setBounds(586, 258, 336, 25);
+        contentPane.add(textFieldDate);
+        textFieldDate.setColumns(10);
 
         JLabel lblRepeat = new JLabel("Repeat");
         lblRepeat.setFont(new Font("Tahoma", Font.PLAIN, 18));
