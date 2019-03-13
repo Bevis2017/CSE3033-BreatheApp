@@ -87,6 +87,12 @@ public class SignUp extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel label = new JLabel("");
 		label.setForeground(Color.BLACK);
@@ -129,6 +135,7 @@ public class SignUp extends JFrame {
 					Token token = new Token();
 					token.generateToken(txtFieldEmail.getText());
 					token.saveToken();
+					JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
 				}
 
 			}
@@ -233,9 +240,6 @@ public class SignUp extends JFrame {
 				}
 			}
 		});
-
-		JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
-		
 	}
 
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX =

@@ -89,6 +89,5 @@ public class Logout extends JFrame {
 				dispose();
 			}
 		});
-
 	}
 }
