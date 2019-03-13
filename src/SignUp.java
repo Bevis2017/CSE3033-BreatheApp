@@ -133,14 +133,23 @@ public class SignUp extends JFrame {
 				if (txtFieldEmail.getText().length() > 0
 						&& txtFieldUsername.getText().length() > 0
 						&& String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
-					boolean register = user.createAccount(txtFieldUsername.getText(), txtFieldEmail.getText(), String.valueOf(txtFieldPassword.getPassword()));
-					if (register) {
-						Token token = new Token();
-						token.generateToken(txtFieldEmail.getText());
-						token.saveToken();
-						JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
-						dispose();
-					}
+				    if (!user.isUserEmailAvailable(txtFieldEmail.getText())) {
+				        // error
+                        JOptionPane.showMessageDialog(new Frame(), "The email must be unique !");
+                    } else if (!user.isUserNameAvailable(txtFieldUsername.getText())) {
+				        // error
+                        JOptionPane.showMessageDialog(new Frame(), "The username must be unique !");
+                    } else {
+				        // no problem
+                        boolean register = user.createAccount(txtFieldUsername.getText(), txtFieldEmail.getText(), String.valueOf(txtFieldPassword.getPassword()));
+                        if (register) {
+                            Token token = new Token();
+                            token.generateToken(txtFieldEmail.getText());
+                            token.saveToken();
+                            JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
+                            dispose();
+                        }
+                    }
 				} else {
 					JOptionPane.showMessageDialog(new Frame(), "Please fill up all the field!");
 				}
