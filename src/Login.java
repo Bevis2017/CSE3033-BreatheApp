@@ -141,7 +141,9 @@ public class Login extends JFrame {
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (txtFieldMail.getText().length() > 0 && String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
+                if (String.valueOf(txtFieldPassword.getPassword()).length()  < 1) {
+                    JOptionPane.showMessageDialog(new Frame(), "Please enter a password!", "Warning", JOptionPane.WARNING_MESSAGE);
+                } else if (txtFieldMail.getText().length() > 0 && String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
 					// validate login info
 					int loginId = user.login(txtFieldMail.getText(), String.valueOf(txtFieldPassword.getPassword()));
 					if ( loginId > 0) {
@@ -206,12 +208,7 @@ public class Login extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-                JPasswordField field = (JPasswordField) e.getSource();
-                char[] password = field.getPassword();
 
-                if (password.length < 1) {
-                    JOptionPane.showMessageDialog(new Frame(), "Please enter a password!", "Warning", JOptionPane.WARNING_MESSAGE);
-                }
             }
         });
 		
