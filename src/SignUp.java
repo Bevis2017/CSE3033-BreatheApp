@@ -130,14 +130,20 @@ public class SignUp extends JFrame {
 		btnSignUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean register = user.createAccount(txtFieldUsername.getText(), txtFieldEmail.getText(), String.valueOf(txtFieldPassword.getPassword()));
-				if (register) {
-					Token token = new Token();
-					token.generateToken(txtFieldEmail.getText());
-					token.saveToken();
-					JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
+				if (txtFieldEmail.getText().length() > 0
+						&& txtFieldUsername.getText().length() > 0
+						&& String.valueOf(txtFieldPassword.getPassword()).length() > 0) {
+					boolean register = user.createAccount(txtFieldUsername.getText(), txtFieldEmail.getText(), String.valueOf(txtFieldPassword.getPassword()));
+					if (register) {
+						Token token = new Token();
+						token.generateToken(txtFieldEmail.getText());
+						token.saveToken();
+						JOptionPane.showMessageDialog(new Frame(), "Congratulation ! Sign up an account successful !");
+						dispose();
+					}
+				} else {
+					JOptionPane.showMessageDialog(new Frame(), "Please fill up all the field!");
 				}
-
 			}
 		});
 		
