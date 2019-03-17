@@ -103,7 +103,7 @@ public class User {
     public boolean resetPassword(String email) {
         String query = "UPDATE user SET password = '%s' WHERE email = '%s'";
         String newPass = generatePassword();
-        int rs = db.update(String.format(query, email, newPass));
+        int rs = db.update(String.format(query, newPass, email));
         boolean status = false;
 
         if (rs > 0) {
