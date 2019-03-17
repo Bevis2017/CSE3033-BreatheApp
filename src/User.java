@@ -116,7 +116,7 @@ public class User {
 
     private String generatePassword() {
         int randomStrLength = 10;
-        char[] possibleCharacters = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789").toCharArray();
+        char[] possibleCharacters = ("ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789").toCharArray();
         String randomStr = RandomStringUtils.random(randomStrLength, 0, possibleCharacters.length - 1, false, false, possibleCharacters, new SecureRandom());
         System.out.println("Generated Password: " + randomStr);
         return randomStr;
