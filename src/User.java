@@ -103,24 +103,21 @@ public class User {
     public boolean resetPassword(String email) {
         String query = "UPDATE user SET password = '%s' WHERE email = '%s'";
         String newPass = generatePassword();
-        ResultSet rs = db.query(String.format(query, email, newPass));
+        int rs = db.update(String.format(query, email, newPass));
         boolean status = false;
 
-        try {
-            if (rs.next()) {
-                sendEmail(email, newPass);
-                status = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (rs > 0) {
+            sendEmail(email, newPass);
+            status = true;
         }
+
         return status;
     }
 
     private String generatePassword() {
         int randomStrLength = 10;
         char[] possibleCharacters = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789").toCharArray();
-        String randomStr = RandomStringUtils.random( randomStrLength, 0, possibleCharacters.length-1, false, false, possibleCharacters, new SecureRandom() );
+        String randomStr = RandomStringUtils.random(randomStrLength, 0, possibleCharacters.length - 1, false, false, possibleCharacters, new SecureRandom());
         System.out.println("Generated Password: " + randomStr);
         return randomStr;
     }
@@ -159,7 +156,7 @@ public class User {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static boolean validateEmail(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }
 
