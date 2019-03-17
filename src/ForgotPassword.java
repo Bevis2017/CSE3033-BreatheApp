@@ -29,7 +29,7 @@ public class ForgotPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtMail;
-	private User user;
+	private User user = new User();
 
 	/**
 	 * Launch the application.
