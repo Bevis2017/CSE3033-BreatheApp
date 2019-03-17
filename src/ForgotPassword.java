@@ -18,6 +18,10 @@ import java.awt.Button;
 import java.awt.SystemColor;
 import javax.swing.JScrollBar;
 import java.awt.Scrollbar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -25,6 +29,7 @@ public class ForgotPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtMail;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -73,6 +78,12 @@ public class ForgotPassword extends JFrame {
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblForgotPassword = new JLabel("FORGOT PASSWORD");
 		lblForgotPassword.setBackground(Color.WHITE);
@@ -105,9 +116,34 @@ public class ForgotPassword extends JFrame {
 		btnSend.setBackground(new Color(255, 182, 193));
 		btnSend.setBounds(453, 346, 302, 41);
 		contentPane.add(btnSend);
-		
-		JOptionPane.showMessageDialog(new Frame(), "The mail format that you entered is incorrect !");
-		JOptionPane.showMessageDialog(new Frame(), "The mail that you entered is not found !");
-		JOptionPane.showMessageDialog(new Frame(), "Please check your mailbox. The new password already sent through your mailbox.");
+		btnSend.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String email = txtMail.getText();
+				if (User.validateEmail(email)) {
+					// email format correct, check if email exist
+					if (!user.isUserEmailAvailable(email)) {
+						// email exist, reset password
+						boolean resetStatus = user.resetPassword(email);
+
+						if (resetStatus) {
+							JOptionPane.showMessageDialog(new Frame(), "Please check your mailbox. The new password already sent through your mailbox.");
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(new Frame(), "Unexpected error, please try again!");
+						}
+					} else {
+						// email not exist (user not found)
+						JOptionPane.showMessageDialog(new Frame(), "The mail that you entered is not found !");
+					}
+				} else {
+					// wrong format
+					JOptionPane.showMessageDialog(new Frame(), "The mail format that you entered is incorrect !");
+				}
+			}
+		});
+
+
+
 	}
 }
