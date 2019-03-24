@@ -119,6 +119,12 @@ public class MainPage extends JFrame {
 		summaryBtn.setBackground(new Color(255, 182, 193));
 		summaryBtn.setBounds(722, 169, 225, 68);
 		contentPane.add(summaryBtn);
+		summaryBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SummaryAty().setVisible(true);
+			}
+		});
 		
 		JButton recycleBtn = new JButton("RECYCLE BIN");
 		recycleBtn.setForeground(Color.WHITE);
@@ -126,6 +132,12 @@ public class MainPage extends JFrame {
 		recycleBtn.setBackground(new Color(255, 182, 193));
 		recycleBtn.setBounds(722, 267, 225, 68);
 		contentPane.add(recycleBtn);
+		recycleBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new RecycleBin().setVisible(true);
+			}
+		});
 		
 		JButton settingBtn = new JButton("SETTING");
 		settingBtn.setForeground(Color.WHITE);
@@ -133,6 +145,12 @@ public class MainPage extends JFrame {
 		settingBtn.setBackground(new Color(255, 182, 193));
 		settingBtn.setBounds(722, 369, 225, 68);
 		contentPane.add(settingBtn);
+		settingBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SettingPage().setVisible(true);
+			}
+		});
 		
 		JButton addActBtn = new JButton("+");
 		addActBtn.setForeground(Color.WHITE);
