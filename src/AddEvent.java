@@ -1,7 +1,4 @@
-import com.github.lgooddatepicker.components.ComponentEvent;
-import com.github.lgooddatepicker.components.ComponentListener;
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.TimePicker;
+import com.github.lgooddatepicker.components.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -34,6 +31,7 @@ public class AddEvent extends JFrame {
     private JTextField txtInvitees;
     private JTextField textFieldTime;
     private JTextField textFieldDate;
+    private DatePickerSettings dateSettings;
 
     /**
      * Launch the application.
@@ -69,6 +67,10 @@ public class AddEvent extends JFrame {
         panel.setBounds(0, 0, 370, 594);
         contentPane.add(panel);
         panel.setLayout(null);
+
+        dateSettings = new DatePickerSettings();
+        dateSettings.setFormatForDatesCommonEra("d MMM yyyy");
+        dateSettings.setFormatForDatesBeforeCommonEra("d MMM uuuu");
 
         JButton btnBack = new JButton("BACK");
         btnBack.setForeground(Color.WHITE);
@@ -145,7 +147,7 @@ public class AddEvent extends JFrame {
         contentPane.add(lblDate);
 
         // Create a date picker, and add it to the form.
-        DatePicker datePicker1 = new DatePicker();
+        DatePicker datePicker1 = new DatePicker(dateSettings);
         datePicker1.setBounds(586, 258, 336, 25);
         datePicker1.setDateToToday();
         contentPane.add(datePicker1);
