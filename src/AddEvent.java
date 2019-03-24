@@ -1,4 +1,7 @@
+import com.github.lgooddatepicker.components.ComponentEvent;
+import com.github.lgooddatepicker.components.ComponentListener;
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.TimePicker;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -141,15 +144,27 @@ public class AddEvent extends JFrame {
         lblDate.setBounds(424, 260, 47, 20);
         contentPane.add(lblDate);
 
-        textFieldTime = new JTextField();
-        textFieldTime.setBounds(586, 214, 336, 25);
-        contentPane.add(textFieldTime);
-        textFieldTime.setColumns(10);
+        // Create a date picker, and add it to the form.
+        DatePicker datePicker1 = new DatePicker();
+        datePicker1.setBounds(586, 258, 336, 25);
+        datePicker1.setDateToToday();
+        contentPane.add(datePicker1);
 
-        textFieldDate = new JTextField();
-        textFieldDate.setBounds(586, 258, 336, 25);
-        contentPane.add(textFieldDate);
-        textFieldDate.setColumns(10);
+        // Create a time picker, and add it to the form.
+        TimePicker timePicker1 = new TimePicker();
+        timePicker1.setBounds(586, 214, 336, 25);
+        contentPane.add(timePicker1);
+
+        //textFieldTime = new JTextField();
+        //textFieldTime.setBounds(586, 214, 336, 25);
+        //contentPane.add(textFieldTime);
+        //textFieldTime.setColumns(10);
+
+        //textFieldDate = new JTextField();
+        //textFieldDate.setBounds(586, 258, 336, 25);
+        //contentPane.add(textFieldDate);
+        //textFieldDate.setColumns(10);
+
 
         JLabel lblRepeat = new JLabel("Repeat");
         lblRepeat.setFont(new Font("Tahoma", Font.PLAIN, 18));
