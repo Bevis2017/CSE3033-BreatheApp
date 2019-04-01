@@ -10,18 +10,29 @@ import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
 public class WebBrowser extends JPanel {
 
     WebEngine webEngine;
+    WebView webView;
 
     public WebBrowser() {
         JFrame frame = new JFrame();
         frame.add(this);
         frame.setSize(700, 450);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Here you can give your own implementation according to you.
+                //webView.getEngine().load(null);
+                clear();
+                //System.exit(0);
+            }
+        });
 
         final JFXPanel fxPanel = new JFXPanel();
         setLayout(new BorderLayout());
@@ -65,13 +76,22 @@ public class WebBrowser extends JPanel {
         });
     }
 
+    public void clear() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                webView.getEngine().load(null);
+            }
+        });
+    }
+
     private void initFX(JFXPanel fxPanel) {
         Scene scene = createScene();
         fxPanel.setScene(scene);
     }
 
     private Scene createScene() {
-        WebView webView = new WebView();
+        webView = new WebView();
         webEngine = webView.getEngine();
         webEngine.getLoadWorker().progressProperty().addListener(new ChangeListener<Number>() {
             @Override
