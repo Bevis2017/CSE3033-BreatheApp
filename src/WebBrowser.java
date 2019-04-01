@@ -17,45 +17,13 @@ public class WebBrowser extends JPanel {
     WebEngine webEngine;
 
     public WebBrowser() {
-        //initAndShowGUI();
-
         JFrame frame = new JFrame();
         frame.add(this);
         frame.setSize(700, 450);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-//        JPanel toolbar = new JPanel();
-//        toolbar.setLayout(new FlowLayout());
-
-        //JButton button;
-
-//        button = new JButton("Google");
-//        button.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                loadPage("https://www.google.com/ncr");
-//            }
-//        });
-
-        //toolbar.add(button);
-
-        //button = new JButton("YouTube");
-//        button.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                loadPage("https://www.youtube.com");
-//            }
-//        });
-
-        //toolbar.add(button);
-
         final JFXPanel fxPanel = new JFXPanel();
-
         setLayout(new BorderLayout());
         add(fxPanel, BorderLayout.CENTER);
         //add(toolbar, BorderLayout.NORTH);
@@ -75,17 +43,6 @@ public class WebBrowser extends JPanel {
                 //initAndShowGUI();
             }
         });
-    }
-
-    public void initAndShowGUI() {
-
-        JFrame frame = new JFrame();
-
-        frame.add(new WebBrowser());
-        frame.setSize(1024, 768);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public void loadPage(String url) {
@@ -114,11 +71,8 @@ public class WebBrowser extends JPanel {
     }
 
     private Scene createScene() {
-
         WebView webView = new WebView();
-
         webEngine = webView.getEngine();
-
         webEngine.getLoadWorker().progressProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
@@ -152,7 +106,6 @@ public class WebBrowser extends JPanel {
         //webEngine.load("http://www.google.com");
 
         BorderPane bp = new BorderPane();
-
         bp.setCenter(webView);
 
         Scene scene = new Scene(bp);
