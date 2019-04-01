@@ -30,19 +30,19 @@ public class WebBrowser extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                loadPage("http://www.google.com");
+                loadPage("https://www.google.com/ncr");
             }
         });
 
         toolbar.add(button);
 
-        button = new JButton("Gotry.ml");
+        button = new JButton("YouTube");
         button.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                loadPage("http://www.gotry.ml");
+                loadPage("https://www.youtube.com");
             }
         });
 
