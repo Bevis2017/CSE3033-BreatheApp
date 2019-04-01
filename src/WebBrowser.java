@@ -12,12 +12,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 
 public class WebBrowser extends JPanel {
 
     WebEngine webEngine;
 
     public WebBrowser() {
+        //initAndShowGUI();
+
+        JFrame frame = new JFrame();
+        frame.add(this);
+        frame.setSize(1024, 768);
+        frame.setVisible(true);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel toolbar = new JPanel();
         toolbar.setLayout(new FlowLayout());
@@ -62,7 +71,7 @@ public class WebBrowser extends JPanel {
         });
     }
 
-    private static void initAndShowGUI() {
+    public void initAndShowGUI() {
 
         JFrame frame = new JFrame();
 
@@ -77,12 +86,12 @@ public class WebBrowser extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                initAndShowGUI();
+                //initAndShowGUI();
             }
         });
     }
 
-    private void loadPage(String url) {
+    public void loadPage(String url) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -93,6 +102,20 @@ public class WebBrowser extends JPanel {
             }
         });
 
+    }
+
+    public void loadLocalPage(String path) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //File f = new File(path);
+                //webEngine.load(f.toURI().toString());
+
+                URL url = this.getClass().getResource(path);
+                webEngine.load(url.toString());
+
+            }
+        });
     }
 
     private void initFX(JFXPanel fxPanel) {
@@ -136,7 +159,7 @@ public class WebBrowser extends JPanel {
             }
         });
 
-        webEngine.load("http://www.google.com");
+        //webEngine.load("http://www.google.com");
 
         BorderPane bp = new BorderPane();
 
