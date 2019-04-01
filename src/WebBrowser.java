@@ -10,9 +10,6 @@ import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.net.URL;
 
 public class WebBrowser extends JPanel {
@@ -24,49 +21,58 @@ public class WebBrowser extends JPanel {
 
         JFrame frame = new JFrame();
         frame.add(this);
-        frame.setSize(1024, 768);
+        frame.setSize(700, 450);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel toolbar = new JPanel();
-        toolbar.setLayout(new FlowLayout());
+//        JPanel toolbar = new JPanel();
+//        toolbar.setLayout(new FlowLayout());
 
-        JButton button;
+        //JButton button;
 
-        button = new JButton("Google");
-        button.addActionListener(new ActionListener() {
+//        button = new JButton("Google");
+//        button.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                loadPage("https://www.google.com/ncr");
+//            }
+//        });
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        //toolbar.add(button);
 
-                loadPage("https://www.google.com/ncr");
-            }
-        });
+        //button = new JButton("YouTube");
+//        button.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                loadPage("https://www.youtube.com");
+//            }
+//        });
 
-        toolbar.add(button);
-
-        button = new JButton("YouTube");
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                loadPage("https://www.youtube.com");
-            }
-        });
-
-        toolbar.add(button);
+        //toolbar.add(button);
 
         final JFXPanel fxPanel = new JFXPanel();
 
         setLayout(new BorderLayout());
         add(fxPanel, BorderLayout.CENTER);
-        add(toolbar, BorderLayout.NORTH);
+        //add(toolbar, BorderLayout.NORTH);
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 initFX(fxPanel);
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                //initAndShowGUI();
             }
         });
     }
@@ -82,23 +88,11 @@ public class WebBrowser extends JPanel {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                //initAndShowGUI();
-            }
-        });
-    }
-
     public void loadPage(String url) {
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 webEngine.load(url);
-
             }
         });
 
@@ -108,12 +102,8 @@ public class WebBrowser extends JPanel {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                //File f = new File(path);
-                //webEngine.load(f.toURI().toString());
-
                 URL url = this.getClass().getResource(path);
                 webEngine.load(url.toString());
-
             }
         });
     }
