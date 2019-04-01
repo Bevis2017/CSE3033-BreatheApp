@@ -48,13 +48,13 @@ public class BreatheTime extends JFrame {
 		setTitle("Breathe Activity");
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		Panel panel = new Panel();
 		panel.setLayout(null);
 		panel.setBackground(Color.PINK);
 		panel.setBounds(0, 0, 370, 594);
 		contentPane.add(panel);
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,29 +65,29 @@ public class BreatheTime extends JFrame {
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
-		
+
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(BreatheTime.class.getResource("/image/njy-lotus[1].png")));
 		label_1.setBounds(-83, 74, 487, 460);
 		panel.add(label_1);
-		
+
 		JLabel lblSummary = new JLabel("BREATHE ACTIVITY");
 		lblSummary.setForeground(Color.BLACK);
 		lblSummary.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblSummary.setBackground(Color.WHITE);
 		lblSummary.setBounds(516, 32, 302, 60);
 		contentPane.add(lblSummary);
-		
-		Button btnDay = new Button("MUSIC TIME");
-		btnDay.setForeground(Color.WHITE);
-		btnDay.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnDay.setBackground(new Color(255, 182, 193));
-		btnDay.setBounds(443, 376, 205, 80);
-		contentPane.add(btnDay);
-		btnDay.addActionListener(new ActionListener() {
+
+		Button btnMusicTime = new Button("MUSIC TIME");
+		btnMusicTime.setForeground(Color.WHITE);
+		btnMusicTime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnMusicTime.setBackground(new Color(255, 182, 193));
+		btnMusicTime.setBounds(443, 376, 205, 80);
+		contentPane.add(btnMusicTime);
+		btnMusicTime.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnDay.addActionListener(new ActionListener() {
+				btnMusicTime.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						WebBrowser wb = new WebBrowser();
@@ -98,35 +98,35 @@ public class BreatheTime extends JFrame {
 				});
 			}
 		});
-		
-		Button button = new Button("BREATHE TIME");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button.setBackground(new Color(255, 182, 193));
-		button.setBounds(443, 184, 205, 80);
-		contentPane.add(button);
-		button.addActionListener(new ActionListener() {
+
+		Button btnBreatheTime = new Button("BREATHE TIME");
+		btnBreatheTime.setForeground(Color.WHITE);
+		btnBreatheTime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnBreatheTime.setBackground(new Color(255, 182, 193));
+		btnBreatheTime.setBounds(443, 184, 205, 80);
+		contentPane.add(btnBreatheTime);
+		btnBreatheTime.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				WebBrowser wb = new WebBrowser();
 				//wb.initAndShowGUI();
 				//wb.setVisible(true);
-				wb.loadLocalPage("/html/test.html");
+				wb.loadLocalPage("/html/BreathePlayer.html");
 			}
 		});
-		
-		Button button_1 = new Button("FUN FACT TIME");
-		button_1.setForeground(Color.WHITE);
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button_1.setBackground(new Color(255, 182, 193));
-		button_1.setBounds(695, 184, 205, 80);
-		contentPane.add(button_1);
-		
-		Button button_2 = new Button("QUOTE TIME");
-		button_2.setForeground(Color.WHITE);
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button_2.setBackground(new Color(255, 182, 193));
-		button_2.setBounds(695, 376, 205, 80);
-		contentPane.add(button_2);
+
+		Button btnFunTime = new Button("FUN FACT TIME");
+		btnFunTime.setForeground(Color.WHITE);
+		btnFunTime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnFunTime.setBackground(new Color(255, 182, 193));
+		btnFunTime.setBounds(695, 184, 205, 80);
+		contentPane.add(btnFunTime);
+
+		Button btnQuoteTime = new Button("QUOTE TIME");
+		btnQuoteTime.setForeground(Color.WHITE);
+		btnQuoteTime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnQuoteTime.setBackground(new Color(255, 182, 193));
+		btnQuoteTime.setBounds(695, 376, 205, 80);
+		contentPane.add(btnQuoteTime);
 	}
 }
