@@ -84,6 +84,20 @@ public class BreatheTime extends JFrame {
 		btnDay.setBackground(new Color(255, 182, 193));
 		btnDay.setBounds(443, 376, 205, 80);
 		contentPane.add(btnDay);
+		btnDay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnDay.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						WebBrowser wb = new WebBrowser();
+						//wb.initAndShowGUI();
+						//wb.setVisible(true);
+						wb.loadPage("https://www.youtube.com/watch?v=8Z5EjAmZS1o");
+					}
+				});
+			}
+		});
 		
 		Button button = new Button("BREATHE TIME");
 		button.setForeground(Color.WHITE);
@@ -91,6 +105,15 @@ public class BreatheTime extends JFrame {
 		button.setBackground(new Color(255, 182, 193));
 		button.setBounds(443, 184, 205, 80);
 		contentPane.add(button);
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WebBrowser wb = new WebBrowser();
+				//wb.initAndShowGUI();
+				//wb.setVisible(true);
+				wb.loadLocalPage("/html/test.html");
+			}
+		});
 		
 		Button button_1 = new Button("FUN FACT TIME");
 		button_1.setForeground(Color.WHITE);
