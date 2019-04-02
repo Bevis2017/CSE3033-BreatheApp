@@ -71,33 +71,33 @@ public class RecycleBin extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(RecycleBin.class.getResource("/image/1-512[1].png")));
-		label_4.setBounds(-74, 89, 458, 447);
-		panel.add(label_4);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(RecycleBin.class.getResource("/image/1-512[1].png")));
+		lblImage.setBounds(-74, 89, 458, 447);
+		panel.add(lblImage);
 		
-		JLabel viewCalLbl = new JLabel("RECYCLE BIN");
-		viewCalLbl.setForeground(Color.BLACK);
-		viewCalLbl.setFont(new Font("Tahoma", Font.BOLD, 30));
-		viewCalLbl.setBackground(Color.WHITE);
-		viewCalLbl.setBounds(595, 16, 214, 60);
-		contentPane.add(viewCalLbl);
+		JLabel lblRecycleBin = new JLabel("RECYCLE BIN");
+		lblRecycleBin.setForeground(Color.BLACK);
+		lblRecycleBin.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblRecycleBin.setBackground(Color.WHITE);
+		lblRecycleBin.setBounds(595, 16, 214, 60);
+		contentPane.add(lblRecycleBin);
 		
 		JList deletedList = new JList();
 		deletedList.setToolTipText("this is deleted activity list");
 		deletedList.setBounds(406, 72, 562, 452);
 		contentPane.add(deletedList);
 		
-		Button button = new Button("RECOVER");
-		button.addActionListener(new ActionListener() {
+		Button btnRecover = new Button("RECOVER");
+		btnRecover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button.setBackground(new Color(255, 182, 193));
-		button.setBounds(528, 543, 336, 29);
-		contentPane.add(button);
+		btnRecover.setForeground(Color.WHITE);
+		btnRecover.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnRecover.setBackground(new Color(255, 182, 193));
+		btnRecover.setBounds(528, 543, 336, 29);
+		contentPane.add(btnRecover);
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		JOptionPane.showMessageDialog(new Frame(), "Recover successful !");

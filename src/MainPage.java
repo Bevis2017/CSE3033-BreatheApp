@@ -68,96 +68,96 @@ public class MainPage extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton logoutBtn = new JButton("LOGOUT");
-		logoutBtn.addActionListener(new ActionListener() {
+		JButton btnLogout = new JButton("LOGOUT");
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Logout().setVisible(true);
 			}
 		});
-		logoutBtn.setForeground(Color.WHITE);
-		logoutBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		logoutBtn.setBackground(SystemColor.activeCaption);
-		logoutBtn.setBounds(15, 16, 128, 38);
-		panel.add(logoutBtn);
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnLogout.setBackground(SystemColor.activeCaption);
+		btnLogout.setBounds(15, 16, 128, 38);
+		panel.add(btnLogout);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(MainPage.class.getResource("/image/Relax-PNG-Clipart[1].png")));
-		label_4.setBounds(-113, 16, 521, 578);
-		panel.add(label_4);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(MainPage.class.getResource("/image/Relax-PNG-Clipart[1].png")));
+		lblImage.setBounds(-113, 16, 521, 578);
+		panel.add(lblImage);
 		
-		JLabel lblAddNewEvent = new JLabel("MAIN PAGE");
-		lblAddNewEvent.setForeground(Color.BLACK);
-		lblAddNewEvent.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblAddNewEvent.setBackground(Color.WHITE);
-		lblAddNewEvent.setBounds(609, 11, 181, 57);
-		contentPane.add(lblAddNewEvent);
+		JLabel lblMainPage = new JLabel("MAIN PAGE");
+		lblMainPage.setForeground(Color.BLACK);
+		lblMainPage.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblMainPage.setBackground(Color.WHITE);
+		lblMainPage.setBounds(609, 11, 181, 57);
+		contentPane.add(lblMainPage);
 		
-		JButton viewCalBtn = new JButton("VIEW CALENDER");
-		viewCalBtn.setForeground(Color.WHITE);
-		viewCalBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		viewCalBtn.setBackground(new Color(255, 182, 193));
-		viewCalBtn.setBounds(431, 169, 225, 68);
-		contentPane.add(viewCalBtn);
+		JButton btnViewCalendar = new JButton("VIEW CALENDER");
+		btnViewCalendar.setForeground(Color.WHITE);
+		btnViewCalendar.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnViewCalendar.setBackground(new Color(255, 182, 193));
+		btnViewCalendar.setBounds(431, 169, 225, 68);
+		contentPane.add(btnViewCalendar);
 		
-		JButton addFriendBtn = new JButton("ADD FRIEND");
-		addFriendBtn.setForeground(Color.WHITE);
-		addFriendBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		addFriendBtn.setBackground(new Color(255, 182, 193));
-		addFriendBtn.setBounds(431, 267, 225, 68);
-		contentPane.add(addFriendBtn);
+		JButton btnAddFriend = new JButton("ADD FRIEND");
+		btnAddFriend.setForeground(Color.WHITE);
+		btnAddFriend.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAddFriend.setBackground(new Color(255, 182, 193));
+		btnAddFriend.setBounds(431, 267, 225, 68);
+		contentPane.add(btnAddFriend);
 		
-		JButton breatheBtn = new JButton("BREATHE TIME");
-		breatheBtn.setForeground(Color.WHITE);
-		breatheBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		breatheBtn.setBackground(new Color(255, 182, 193));
-		breatheBtn.setBounds(431, 369, 225, 68);
-		contentPane.add(breatheBtn);
+		JButton btnBreatheTime = new JButton("BREATHE TIME");
+		btnBreatheTime.setForeground(Color.WHITE);
+		btnBreatheTime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnBreatheTime.setBackground(new Color(255, 182, 193));
+		btnBreatheTime.setBounds(431, 369, 225, 68);
+		contentPane.add(btnBreatheTime);
 		
-		JButton summaryBtn = new JButton("MY SUMMARY");
-		summaryBtn.setForeground(Color.WHITE);
-		summaryBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		summaryBtn.setBackground(new Color(255, 182, 193));
-		summaryBtn.setBounds(722, 169, 225, 68);
-		contentPane.add(summaryBtn);
-		summaryBtn.addActionListener(new ActionListener() {
+		JButton btnSummary = new JButton("MY SUMMARY");
+		btnSummary.setForeground(Color.WHITE);
+		btnSummary.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSummary.setBackground(new Color(255, 182, 193));
+		btnSummary.setBounds(722, 169, 225, 68);
+		contentPane.add(btnSummary);
+		btnSummary.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new SummaryAty().setVisible(true);
 			}
 		});
 		
-		JButton recycleBtn = new JButton("RECYCLE BIN");
-		recycleBtn.setForeground(Color.WHITE);
-		recycleBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		recycleBtn.setBackground(new Color(255, 182, 193));
-		recycleBtn.setBounds(722, 267, 225, 68);
-		contentPane.add(recycleBtn);
-		recycleBtn.addActionListener(new ActionListener() {
+		JButton btnRecycleBin = new JButton("RECYCLE BIN");
+		btnRecycleBin.setForeground(Color.WHITE);
+		btnRecycleBin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnRecycleBin.setBackground(new Color(255, 182, 193));
+		btnRecycleBin.setBounds(722, 267, 225, 68);
+		contentPane.add(btnRecycleBin);
+		btnRecycleBin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new RecycleBin().setVisible(true);
 			}
 		});
 		
-		JButton settingBtn = new JButton("SETTING");
-		settingBtn.setForeground(Color.WHITE);
-		settingBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		settingBtn.setBackground(new Color(255, 182, 193));
-		settingBtn.setBounds(722, 369, 225, 68);
-		contentPane.add(settingBtn);
-		settingBtn.addActionListener(new ActionListener() {
+		JButton btnSetting = new JButton("SETTING");
+		btnSetting.setForeground(Color.WHITE);
+		btnSetting.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSetting.setBackground(new Color(255, 182, 193));
+		btnSetting.setBounds(722, 369, 225, 68);
+		contentPane.add(btnSetting);
+		btnSetting.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new SettingPage().setVisible(true);
 			}
 		});
 		
-		JButton addActBtn = new JButton("+");
-		addActBtn.setForeground(Color.WHITE);
-		addActBtn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		addActBtn.setBackground(new Color(255, 182, 193));
-		addActBtn.setBounds(861, 507, 86, 68);
-		contentPane.add(addActBtn);
+		JButton btnAddEvent = new JButton("+");
+		btnAddEvent.setForeground(Color.WHITE);
+		btnAddEvent.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAddEvent.setBackground(new Color(255, 182, 193));
+		btnAddEvent.setBounds(861, 507, 86, 68);
+		contentPane.add(btnAddEvent);
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	}

@@ -67,10 +67,10 @@ public class ForgotPassword extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(ForgotPassword.class.getResource("/image/forgot-password[1].png")));
-		label.setBounds(15, 93, 340, 257);
-		panel.add(label);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(ForgotPassword.class.getResource("/image/forgot-password[1].png")));
+		lblImage.setBounds(15, 93, 340, 257);
+		panel.add(lblImage);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setForeground(Color.WHITE);
@@ -85,24 +85,24 @@ public class ForgotPassword extends JFrame {
 			}
 		});
 		
-		JLabel lblForgotPassword = new JLabel("FORGOT PASSWORD");
-		lblForgotPassword.setBackground(Color.WHITE);
-		lblForgotPassword.setForeground(Color.BLACK);
-		lblForgotPassword.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblForgotPassword.setBounds(441, 26, 324, 60);
-		contentPane.add(lblForgotPassword);
+		JLabel lblForgotPassword1 = new JLabel("FORGOT PASSWORD");
+		lblForgotPassword1.setBackground(Color.WHITE);
+		lblForgotPassword1.setForeground(Color.BLACK);
+		lblForgotPassword1.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblForgotPassword1.setBounds(441, 26, 324, 60);
+		contentPane.add(lblForgotPassword1);
 		
-		JLabel lblItsFree = new JLabel("Forgot Your Password ?");
-		lblItsFree.setForeground(Color.BLACK);
-		lblItsFree.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblItsFree.setBounds(493, 83, 219, 25);
-		contentPane.add(lblItsFree);
+		JLabel lblForgotPassword2 = new JLabel("Forgot Your Password ?");
+		lblForgotPassword2.setForeground(Color.BLACK);
+		lblForgotPassword2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblForgotPassword2.setBounds(493, 83, 219, 25);
+		contentPane.add(lblForgotPassword2);
 		
-		JTextPane txtpnEnterYouEmail = new JTextPane();
-		txtpnEnterYouEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtpnEnterYouEmail.setText("Enter you email address below and we'll send you a new password");
-		txtpnEnterYouEmail.setBounds(455, 124, 287, 70);
-		contentPane.add(txtpnEnterYouEmail);
+		JTextPane txtPaneMail = new JTextPane();
+		txtPaneMail.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtPaneMail.setText("Enter you email address below and we'll send you a new password");
+		txtPaneMail.setBounds(455, 124, 287, 70);
+		contentPane.add(txtPaneMail);
 		contentPane.setFocusable(true);
 		
 		txtMail = new JTextField();

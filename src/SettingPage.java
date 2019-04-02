@@ -71,22 +71,22 @@ public class SettingPage extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(SettingPage.class.getResource("/image/TECHVOC-300x297[1].png")));
-		label_4.setBounds(37, 83, 318, 425);
-		panel.add(label_4);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(SettingPage.class.getResource("/image/TECHVOC-300x297[1].png")));
+		lblImage.setBounds(37, 83, 318, 425);
+		panel.add(lblImage);
 		
-		JLabel settingLbl = new JLabel("SETTING");
-		settingLbl.setForeground(Color.BLACK);
-		settingLbl.setFont(new Font("Tahoma", Font.BOLD, 30));
-		settingLbl.setBackground(Color.WHITE);
-		settingLbl.setBounds(607, 0, 138, 60);
-		contentPane.add(settingLbl);
+		JLabel lblSetting = new JLabel("SETTING");
+		lblSetting.setForeground(Color.BLACK);
+		lblSetting.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblSetting.setBackground(Color.WHITE);
+		lblSetting.setBounds(607, 0, 138, 60);
+		contentPane.add(lblSetting);
 		
-		JPanel profilePicPanel = new JPanel();
-		profilePicPanel.setBackground(Color.PINK);
-		profilePicPanel.setBounds(605, 60, 156, 166);
-		contentPane.add(profilePicPanel);
+		JPanel jPanelProfilePic = new JPanel();
+		jPanelProfilePic.setBackground(Color.PINK);
+		jPanelProfilePic.setBounds(605, 60, 156, 166);
+		contentPane.add(jPanelProfilePic);
 		
 		userIDTxt = new JTextField();
 		userIDTxt.setBackground(Color.WHITE);

@@ -62,6 +62,15 @@ public class User {
         return status;
     }
 
+    public ResultSet searchUserByName(String keywords) {
+        String query = "SELECT * FROM user WHERE name LIKE '%%%s%%'";
+        String completeQuery = String.format(query, keywords);
+        System.out.println("[User] [searchUserByName] query: " + completeQuery);
+        ResultSet rs = db.query(completeQuery);
+
+        return  rs;
+    }
+
     public boolean createAccount(String username, String email, String password) {
         boolean status = false;
 
@@ -73,7 +82,6 @@ public class User {
             if (rs != 0) {
                 status = true;
             }
-
         }
 
         return status;

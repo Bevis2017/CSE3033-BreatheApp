@@ -73,28 +73,28 @@ public class ViewCalender extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(ViewCalender.class.getResource("/image/445px-Blue_calendar_icon_with_dates_crossed_out.svg[1].png")));
-		label_4.setBounds(-18, 72, 405, 491);
-		panel.add(label_4);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(ViewCalender.class.getResource("/image/445px-Blue_calendar_icon_with_dates_crossed_out.svg[1].png")));
+		lblImage.setBounds(-18, 72, 405, 491);
+		panel.add(lblImage);
 		
-		JLabel viewCalBtn = new JLabel("VIEW ACTIVITIES");
-		viewCalBtn.setForeground(Color.BLACK);
-		viewCalBtn.setFont(new Font("Tahoma", Font.BOLD, 30));
-		viewCalBtn.setBackground(Color.WHITE);
-		viewCalBtn.setBounds(543, 0, 291, 60);
-		contentPane.add(viewCalBtn);
+		JLabel btnViewActivities = new JLabel("VIEW ACTIVITIES");
+		btnViewActivities.setForeground(Color.BLACK);
+		btnViewActivities.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnViewActivities.setBackground(Color.WHITE);
+		btnViewActivities.setBounds(543, 0, 291, 60);
+		contentPane.add(btnViewActivities);
 		
 		JScrollPane calScrollPane = new JScrollPane();
 		calScrollPane.setBounds(417, 76, 525, 416);
 		contentPane.add(calScrollPane);
 		
-		Button button = new Button("VIEW DETAIL");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button.setBackground(new Color(255, 182, 193));
-		button.setBounds(596, 524, 179, 29);
-		contentPane.add(button);
+		Button btnViewDetail = new Button("VIEW DETAIL");
+		btnViewDetail.setForeground(Color.WHITE);
+		btnViewDetail.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnViewDetail.setBackground(new Color(255, 182, 193));
+		btnViewDetail.setBounds(596, 524, 179, 29);
+		contentPane.add(btnViewDetail);
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	}

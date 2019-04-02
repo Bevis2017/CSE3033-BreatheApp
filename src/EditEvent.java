@@ -77,15 +77,15 @@ public class EditEvent extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(EditEvent.class.getResource("/image/V2[1].png")));
-		lblNewLabel.setBounds(197, 220, 173, 159);
-		panel.add(lblNewLabel);
+		JLabel lblImage = new JLabel("New label");
+		lblImage.setIcon(new ImageIcon(EditEvent.class.getResource("/image/V2[1].png")));
+		lblImage.setBounds(197, 220, 173, 159);
+		panel.add(lblImage);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(EditEvent.class.getResource("/image/calendar[1].png")));
-		label_4.setBounds(54, 79, 270, 425);
-		panel.add(label_4);
+		JLabel lblImage1 = new JLabel("");
+		lblImage1.setIcon(new ImageIcon(EditEvent.class.getResource("/image/calendar[1].png")));
+		lblImage1.setBounds(54, 79, 270, 425);
+		panel.add(lblImage1);
 		
 		JLabel lblEditEvent = new JLabel("EDIT EVENT");
 		lblEditEvent.setForeground(Color.BLACK);
@@ -99,12 +99,12 @@ public class EditEvent extends JFrame {
 		lblName.setBounds(424, 70, 101, 20);
 		contentPane.add(lblName);
 		
-		JLabel label = new JLabel("*");
-		label.setForeground(Color.RED);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label.setBounds(524, 70, 27, 20);
-		label.setToolTipText("Event name is required.");
-		contentPane.add(label);
+		JLabel lblRequired = new JLabel("*");
+		lblRequired.setForeground(Color.RED);
+		lblRequired.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRequired.setBounds(524, 70, 27, 20);
+		lblRequired.setToolTipText("Event name is required.");
+		contentPane.add(lblRequired);
 		
 		txtName = new JTextField();
 		txtName.setColumns(5);
@@ -202,26 +202,26 @@ public class EditEvent extends JFrame {
 		txtrNotes.setBorder(border);
 		contentPane.add(txtrNotes);
 		
-		JLabel label_1 = new JLabel("*");
-		label_1.setForeground(Color.RED);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_1.setBounds(468, 211, 27, 20);
-		label_1.setToolTipText("Time is required.");
-		contentPane.add(label_1);
+		JLabel lblRequired1 = new JLabel("*");
+		lblRequired1.setForeground(Color.RED);
+		lblRequired1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRequired1.setBounds(468, 211, 27, 20);
+		lblRequired1.setToolTipText("Time is required.");
+		contentPane.add(lblRequired1);
 		
-		JLabel label_2 = new JLabel("*");
-		label_2.setForeground(Color.RED);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_2.setBounds(468, 258, 27, 20);
-		label_2.setToolTipText("Date is required.");
-		contentPane.add(label_2);
+		JLabel lblRequired2 = new JLabel("*");
+		lblRequired2.setForeground(Color.RED);
+		lblRequired2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRequired2.setBounds(468, 258, 27, 20);
+		lblRequired2.setToolTipText("Date is required.");
+		contentPane.add(lblRequired2);
 		
-		Button btnAdd = new Button("EDIT");
-		btnAdd.setForeground(Color.WHITE);
-		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAdd.setBackground(new Color(255, 182, 193));
-		btnAdd.setBounds(586, 540, 336, 29);
-		contentPane.add(btnAdd);
+		Button btnEdit = new Button("EDIT");
+		btnEdit.setForeground(Color.WHITE);
+		btnEdit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnEdit.setBackground(new Color(255, 182, 193));
+		btnEdit.setBounds(586, 540, 336, 29);
+		contentPane.add(btnEdit);
 		
 		JOptionPane.showMessageDialog(new Frame(), "Edit successful !");
 		JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Event name is required !");

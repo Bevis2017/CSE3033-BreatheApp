@@ -68,10 +68,10 @@ public class ViewMyActivity extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(ViewMyActivity.class.getResource("/image/416332-music-festival[1].png")));
-		label_4.setBounds(-125, 0, 566, 594);
-		panel.add(label_4);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(ViewMyActivity.class.getResource("/image/416332-music-festival[1].png")));
+		lblImage.setBounds(-125, 0, 566, 594);
+		panel.add(lblImage);
 		
 		JLabel lblActivityTitle = new JLabel("DETAIL OF EVENT");
 		lblActivityTitle.setForeground(Color.BLACK);
@@ -80,23 +80,23 @@ public class ViewMyActivity extends JFrame {
 		lblActivityTitle.setBounds(552, 0, 267, 60);
 		contentPane.add(lblActivityTitle);
 		
-		Button btnView = new Button("EDIT");
-		btnView.addActionListener(new ActionListener() {
+		Button btnEdit = new Button("EDIT");
+		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnView.setForeground(Color.WHITE);
-		btnView.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnView.setBackground(new Color(255, 182, 193));
-		btnView.setBounds(467, 544, 179, 29);
-		contentPane.add(btnView);
+		btnEdit.setForeground(Color.WHITE);
+		btnEdit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnEdit.setBackground(new Color(255, 182, 193));
+		btnEdit.setBounds(467, 544, 179, 29);
+		contentPane.add(btnEdit);
 		
-		Button button = new Button("DELETE");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.BOLD, 20));
-		button.setBackground(new Color(255, 182, 193));
-		button.setBounds(719, 544, 179, 29);
-		contentPane.add(button);
+		Button btnDelete = new Button("DELETE");
+		btnDelete.setForeground(Color.WHITE);
+		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnDelete.setBackground(new Color(255, 182, 193));
+		btnDelete.setBounds(719, 544, 179, 29);
+		contentPane.add(btnDelete);
 		
 		JLabel lblEventName = new JLabel("Event Name :");
 		lblEventName.setFont(new Font("Tahoma", Font.PLAIN, 18));

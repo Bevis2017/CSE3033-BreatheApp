@@ -71,11 +71,11 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Breathe App");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(90, 355, 201, 60);
-		panel.add(lblNewLabel);
+		JLabel lblBreatheApp = new JLabel("Breathe App");
+		lblBreatheApp.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblBreatheApp.setForeground(Color.WHITE);
+		lblBreatheApp.setBounds(90, 355, 201, 60);
+		panel.add(lblBreatheApp);
 		
 		JLabel lblRelax = new JLabel("- relax -");
 		lblRelax.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -83,15 +83,15 @@ public class Login extends JFrame {
 		lblRelax.setBounds(148, 403, 89, 25);
 		panel.add(lblRelax);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(Login.class.getResource("/image/music[1].png")));
-		label_1.setBounds(-70, -15, 505, 386);
-		panel.add(label_1);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(Login.class.getResource("/image/music[1].png")));
+		lblImage.setBounds(-70, -15, 505, 386);
+		panel.add(lblImage);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(35, 52, 300, 302);
-		label.setIcon(new ImageIcon(Login.class.getResource("/image/org.stopbreathethink.app[1].png")));
-		panel.add(label);
+		JLabel lblImage1 = new JLabel("");
+		lblImage1.setBounds(35, 52, 300, 302);
+		lblImage1.setIcon(new ImageIcon(Login.class.getResource("/image/org.stopbreathethink.app[1].png")));
+		panel.add(lblImage1);
 		
 		txtFieldMail = new JTextField();
 		txtFieldMail.setBounds(457, 136, 302, 29);
@@ -211,19 +211,19 @@ public class Login extends JFrame {
 
             }
         });
+
+		JLabel lblWelcomeBack = new JLabel("Welcome back,");
+		lblWelcomeBack.setForeground(Color.BLACK);
+		lblWelcomeBack.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblWelcomeBack.setBounds(457, 13, 258, 60);
+		contentPane.add(lblWelcomeBack);
 		
-		JLabel lblMainTitle = new JLabel("Welcome back,");
-		lblMainTitle.setForeground(Color.BLACK);
-		lblMainTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblMainTitle.setBounds(457, 13, 258, 60);
-		contentPane.add(lblMainTitle);
-		
-		JLabel lblSubTitle = new JLabel("Sign in to continue");
-		lblSubTitle.setForeground(Color.BLACK);
-		lblSubTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSubTitle.setBounds(457, 55, 289, 25);
-		contentPane.add(lblSubTitle);
-		
+		JLabel lblSignInToContinue = new JLabel("Sign in to continue");
+		lblSignInToContinue.setForeground(Color.BLACK);
+		lblSignInToContinue.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSignInToContinue.setBounds(457, 55, 289, 25);
+		contentPane.add(lblSignInToContinue);
+
 		JLabel lblNewUser = new JLabel("New user ?");
 		lblNewUser.setForeground(Color.BLACK);
 		lblNewUser.setFont(new Font("Tahoma", Font.PLAIN, 20));

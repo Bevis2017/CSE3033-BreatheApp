@@ -66,17 +66,17 @@ public class BreatheTime extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(BreatheTime.class.getResource("/image/njy-lotus[1].png")));
-		label_1.setBounds(-83, 74, 487, 460);
-		panel.add(label_1);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(BreatheTime.class.getResource("/image/njy-lotus[1].png")));
+		lblImage.setBounds(-83, 74, 487, 460);
+		panel.add(lblImage);
 
-		JLabel lblSummary = new JLabel("BREATHE ACTIVITY");
-		lblSummary.setForeground(Color.BLACK);
-		lblSummary.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblSummary.setBackground(Color.WHITE);
-		lblSummary.setBounds(516, 32, 302, 60);
-		contentPane.add(lblSummary);
+		JLabel lblBreatheActivity = new JLabel("BREATHE ACTIVITY");
+		lblBreatheActivity.setForeground(Color.BLACK);
+		lblBreatheActivity.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblBreatheActivity.setBackground(Color.WHITE);
+		lblBreatheActivity.setBounds(516, 32, 302, 60);
+		contentPane.add(lblBreatheActivity);
 
 		Button btnMusicTime = new Button("MUSIC TIME");
 		btnMusicTime.setForeground(Color.WHITE);
@@ -93,7 +93,8 @@ public class BreatheTime extends JFrame {
 						WebBrowser wb = new WebBrowser();
 						//wb.initAndShowGUI();
 						//wb.setVisible(true);
-						wb.loadPage("https://www.youtube.com/watch?v=8Z5EjAmZS1o");
+						//wb.loadPage("https://www.youtube.com/watch?v=8Z5EjAmZS1o");
+                        wb.loadPage("https://www.google.com/ncr");
 					}
 				});
 			}

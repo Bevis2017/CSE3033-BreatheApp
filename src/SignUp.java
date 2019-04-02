@@ -94,12 +94,12 @@ public class SignUp extends JFrame {
 			}
 		});
 		
-		JLabel label = new JLabel("");
-		label.setForeground(Color.BLACK);
-		label.setBounds(28, 102, 308, 240);
-		label.setVerticalAlignment(SwingConstants.TOP);
-		label.setIcon(new ImageIcon(SignUp.class.getResource("/image/registericonpatrol-300x230[1].png")));
-		panel.add(label);
+		JLabel lblImage = new JLabel("");
+		lblImage.setForeground(Color.BLACK);
+		lblImage.setBounds(28, 102, 308, 240);
+		lblImage.setVerticalAlignment(SwingConstants.TOP);
+		lblImage.setIcon(new ImageIcon(SignUp.class.getResource("/image/registericonpatrol-300x230[1].png")));
+		panel.add(lblImage);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -156,11 +156,11 @@ public class SignUp extends JFrame {
 			}
 		});
 		
-		JLabel lblMainTitle = new JLabel("SIGN UP");
-		lblMainTitle.setBounds(442, 0, 258, 60);
-		contentPane.add(lblMainTitle);
-		lblMainTitle.setForeground(Color.BLACK);
-		lblMainTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
+		JLabel lblSignUp = new JLabel("SIGN UP");
+		lblSignUp.setBounds(442, 0, 258, 60);
+		contentPane.add(lblSignUp);
+		lblSignUp.setForeground(Color.BLACK);
+		lblSignUp.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
 		JLabel lblSubTitle = new JLabel("It's free and always will be ");
 		lblSubTitle.setBounds(442, 44, 289, 25);

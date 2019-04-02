@@ -66,15 +66,15 @@ public class SummaryAty extends JFrame {
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(SummaryAty.class.getResource("/image/web-analytics-data-analysis[1].png")));
-		lblNewLabel.setBounds(0, 121, 328, 341);
-		panel.add(lblNewLabel);
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(SummaryAty.class.getResource("/image/web-analytics-data-analysis[1].png")));
+		lblImage.setBounds(0, 121, 328, 341);
+		panel.add(lblImage);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(SummaryAty.class.getResource("/image/1171930-university[1].png")));
-		label.setBounds(-132, 0, 594, 594);
-		panel.add(label);
+		JLabel lblImage1 = new JLabel("");
+		lblImage1.setIcon(new ImageIcon(SummaryAty.class.getResource("/image/1171930-university[1].png")));
+		lblImage1.setBounds(-132, 0, 594, 594);
+		panel.add(lblImage1);
 		
 		JLabel lblSummary = new JLabel("SUMMARY ACTIVITY");
 		lblSummary.setForeground(Color.BLACK);
@@ -83,25 +83,25 @@ public class SummaryAty extends JFrame {
 		lblSummary.setBounds(516, 29, 319, 60);
 		contentPane.add(lblSummary);
 		
-		Button btnDay = new Button("DAILY");
-		btnDay.setForeground(Color.WHITE);
-		btnDay.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnDay.setBackground(new Color(255, 182, 193));
-		btnDay.setBounds(516, 150, 302, 80);
-		contentPane.add(btnDay);
+		Button lblDaily = new Button("DAILY");
+		lblDaily.setForeground(Color.WHITE);
+		lblDaily.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblDaily.setBackground(new Color(255, 182, 193));
+		lblDaily.setBounds(516, 150, 302, 80);
+		contentPane.add(lblDaily);
 		
-		Button btnWeek = new Button("WEEKLY");
-		btnWeek.setForeground(Color.WHITE);
-		btnWeek.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnWeek.setBackground(new Color(255, 182, 193));
-		btnWeek.setBounds(516, 287, 302, 80);
-		contentPane.add(btnWeek);
+		Button btnWeekly = new Button("WEEKLY");
+		btnWeekly.setForeground(Color.WHITE);
+		btnWeekly.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnWeekly.setBackground(new Color(255, 182, 193));
+		btnWeekly.setBounds(516, 287, 302, 80);
+		contentPane.add(btnWeekly);
 		
-		Button btnMonth = new Button("MONTHLY");
-		btnMonth.setForeground(Color.WHITE);
-		btnMonth.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnMonth.setBackground(new Color(255, 182, 193));
-		btnMonth.setBounds(516, 430, 302, 80);
-		contentPane.add(btnMonth);
+		Button btnMonthly = new Button("MONTHLY");
+		btnMonthly.setForeground(Color.WHITE);
+		btnMonthly.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnMonthly.setBackground(new Color(255, 182, 193));
+		btnMonthly.setBounds(516, 430, 302, 80);
+		contentPane.add(btnMonthly);
 	}
 }
