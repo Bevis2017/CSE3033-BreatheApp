@@ -18,11 +18,13 @@ public class WebBrowser extends JPanel {
 
     WebEngine webEngine;
     WebView webView;
+    JFrame frame = new JFrame();
 
     public WebBrowser() {
-        JFrame frame = new JFrame();
         frame.add(this);
-        frame.setSize(700, 450);
+        frame.setSize(720, 576);
+        //frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
@@ -47,6 +49,14 @@ public class WebBrowser extends JPanel {
         });
     }
 
+    public void setSize(int w, int h) {
+        frame.setSize(w, h);
+    }
+
+    public void setTitle(String str) {
+        frame.setTitle(str.trim());
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -60,6 +70,7 @@ public class WebBrowser extends JPanel {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                webEngine.setJavaScriptEnabled(true);
                 webEngine.load(url);
             }
         });
@@ -71,6 +82,7 @@ public class WebBrowser extends JPanel {
             @Override
             public void run() {
                 URL url = this.getClass().getResource(path);
+                webEngine.setJavaScriptEnabled(true);
                 webEngine.load(url.toString());
             }
         });

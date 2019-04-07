@@ -1,3 +1,5 @@
+import com.mysql.cj.jdbc.result.ResultSetImpl;
+
 import java.sql.*;
 
 public class Database {
@@ -46,6 +48,7 @@ public class Database {
         return connection;
     }
 
+    // for SELECT
     protected ResultSet query(String q) {
         ResultSet rs = null;
 
@@ -59,8 +62,9 @@ public class Database {
         return rs;
     }
 
+    // for INSERT / UPDATE / DELETE
     protected int update(String q) {
-        System.out.println("update SQL: " + q);
+        System.out.println("execute SQL: " + q);
         int result = 0;
 
         try {
@@ -70,6 +74,18 @@ public class Database {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    // get last update id
+    public ResultSet getLastInsertId() {
+        ResultSet result = null;
+        try {
+            Statement stmt = connection.createStatement();
+            result = stmt.executeQuery("SELECT LAST_INSERT_ID() AS id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 

@@ -56,15 +56,16 @@ public class BreatheTime extends JFrame {
 		contentPane.add(panel);
 
 		JButton btnBack = new JButton("BACK");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
 		JLabel lblImage = new JLabel("");
 		lblImage.setIcon(new ImageIcon(BreatheTime.class.getResource("/image/njy-lotus[1].png")));
@@ -87,16 +88,10 @@ public class BreatheTime extends JFrame {
 		btnMusicTime.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnMusicTime.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						WebBrowser wb = new WebBrowser();
-						//wb.initAndShowGUI();
-						//wb.setVisible(true);
-						//wb.loadPage("https://www.youtube.com/watch?v=8Z5EjAmZS1o");
-                        wb.loadPage("https://www.google.com/ncr");
-					}
-				});
+				WebBrowser wb = new WebBrowser();
+				wb.setTitle("MUSIC TIME");
+				wb.setSize(540, 95);
+				wb.loadLocalPage("/html/MusicTime.html");
 			}
 		});
 
@@ -110,8 +105,8 @@ public class BreatheTime extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				WebBrowser wb = new WebBrowser();
-				//wb.initAndShowGUI();
-				//wb.setVisible(true);
+				wb.setTitle("BREATHE TIME");
+				wb.setSize(720, 450);
 				wb.loadLocalPage("/html/BreathePlayer.html");
 			}
 		});

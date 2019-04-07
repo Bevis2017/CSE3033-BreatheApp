@@ -127,7 +127,7 @@ public class ForgotPassword extends JFrame {
 						boolean resetStatus = user.resetPassword(email);
 
 						if (resetStatus) {
-							JOptionPane.showMessageDialog(new Frame(), "Please check your mailbox. The new password already sent through your mailbox.");
+							JOptionPane.showMessageDialog(new Frame(), "Please check your mailbox. \nThe new password already sent through your mailbox.");
 							dispose();
 						} else {
 							JOptionPane.showMessageDialog(new Frame(), "Unexpected error, please try again!");
