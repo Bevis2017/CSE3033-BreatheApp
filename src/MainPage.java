@@ -158,6 +158,12 @@ public class MainPage extends JFrame {
 		btnAddEvent.setBackground(new Color(255, 182, 193));
 		btnAddEvent.setBounds(861, 507, 86, 68);
 		contentPane.add(btnAddEvent);
+		btnAddEvent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AddEvent().setVisible(true);
+			}
+		});
 		
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 	}
