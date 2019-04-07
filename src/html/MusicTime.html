@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Time</title>
+	<script src="wavesurfer.min.js"></script>
+</head>
+<body>
+	<div id="waveform" style="width: auto;, height: auto;" center>
+		<audio controls autoplay style="width: 500px; height: 35px">
+			<source src="../audio/8Z5EjAmZS1o.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+	</div>
+	<!-- <script>
+		var wavesurfer = WaveSurfer.create({
+			container: '#waveform',
+			waveColor: '#2196f3',
+			progressColor: '#82b1ff'
+		});
+		wavesurfer.load('../audio/8Z5EjAmZS1o.mp3');
+		wavesurfer.on('ready', function () {
+			wavesurfer.setVolume(1);
+			wavesurfer.setHeight(300);
+			wavesurfer.play();
+		});
+		wavesurfer.on('finish', function () {
+			wavesurfer.play();
+		});
+	</script> -->
+	
+</body>
+</html>
