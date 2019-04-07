@@ -26,20 +26,16 @@ public class WebBrowser extends JPanel {
         //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                // Here you can give your own implementation according to you.
-                //webView.getEngine().load(null);
+                // clear everything on close
                 clear();
-                //System.exit(0);
             }
         });
 
         final JFXPanel fxPanel = new JFXPanel();
         setLayout(new BorderLayout());
         add(fxPanel, BorderLayout.CENTER);
-        //add(toolbar, BorderLayout.NORTH);
 
         Platform.runLater(new Runnable() {
             @Override
