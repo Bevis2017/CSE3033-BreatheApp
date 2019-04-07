@@ -71,6 +71,36 @@ public class User {
         return  rs;
     }
 
+    public int getIdByName(String name) {
+        ResultSet rs = db.query(String.format("SELECT * FROM user WHERE name = '%s'", name));
+        int id = 0;
+
+        try {
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public int getIdByEmail(String email) {
+        ResultSet rs = db.query(String.format("SELECT * FROM user WHERE email = '%s'", email));
+        int id = 0;
+
+        try {
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
     public boolean createAccount(String username, String email, String password) {
         boolean status = false;
 
