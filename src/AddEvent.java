@@ -57,7 +57,7 @@ public class AddEvent extends JFrame {
      * Create the frame.
      */
     public AddEvent() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1000, 650);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
@@ -82,6 +82,30 @@ public class AddEvent extends JFrame {
         btnBack.setBackground(SystemColor.activeCaption);
         btnBack.setBounds(15, 16, 115, 29);
         panel.add(btnBack);
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (txtName.getText().trim().length() > 0) {
+                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                    int dialogResult = JOptionPane.showConfirmDialog(
+                            null,
+                            "Are you sure you want to exit without save?",
+                            "Closing",
+                            dialogButton
+                    );
+                    if(dialogResult == JOptionPane.YES_OPTION) {
+                        // YES
+                        System.out.println("Option: YES");
+                        dispose();
+                    } else {
+                        // NO
+                        System.out.println("Option: NO");
+                    }
+                } else {
+                    dispose();
+                }
+            }
+        });
 
         JLabel lblImage = new JLabel("");
         lblImage.setIcon(new ImageIcon(AddEvent.class.getResource("/image/success-add-ok-tick-done-good-yes-icon[1].png")));
@@ -160,17 +184,6 @@ public class AddEvent extends JFrame {
         TimePicker timePicker1 = new TimePicker();
         timePicker1.setBounds(586, 214, 336, 25);
         contentPane.add(timePicker1);
-
-        //textFieldTime = new JTextField();
-        //textFieldTime.setBounds(586, 214, 336, 25);
-        //contentPane.add(textFieldTime);
-        //textFieldTime.setColumns(10);
-
-        //textFieldDate = new JTextField();
-        //textFieldDate.setBounds(586, 258, 336, 25);
-        //contentPane.add(textFieldDate);
-        //textFieldDate.setColumns(10);
-
 
         JLabel lblRepeat = new JLabel("Repeat");
         lblRepeat.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -273,16 +286,17 @@ public class AddEvent extends JFrame {
                 if (txtInvitees.getText().length() > 0) {
                     inviteeList = new ArrayList<>(Arrays.asList(txtInvitees.getText().split(",")));
                     System.out.println("Invitee List Count: " + inviteeList.size());
+                    System.out.println("Invitee List: " + inviteeList.toString());
 
                     for (String str : inviteeList) {
-                        boolean uname = user.isUserNameAvailable(str);
-                        boolean email = user.isUserEmailAvailable(str);
+                        boolean uname = user.isUserNameAvailable(str.trim());
+                        boolean email = user.isUserEmailAvailable(str.trim());
 
                         if (uname && email) {
                             isInviteeValid = false;
                             JOptionPane.showMessageDialog(
                                     new Frame(),
-                                    String.format("Invitee: %s \nInvalid user id / email !", str),
+                                    String.format("Invitee: %s \nInvalid user id / email !", str.trim()),
                                     "User Not Found!",
                                     JOptionPane.WARNING_MESSAGE
                             );
@@ -302,16 +316,17 @@ public class AddEvent extends JFrame {
                     } else {
                         Event event = new Event();
                         event.setName(txtName.getText().trim());
-                        event.setTime(timePicker1.getText().trim());
-                        event.setDate(datePicker1.getText().trim());
+                        event.setTime(timePicker1.toString().trim());
+                        event.setDate(datePicker1.toString().trim());
                         event.setLocation(txtLocation.getText().trim());
                         event.setType(choiceType.getSelectedItem().trim());
                         event.setNotes(txtrNotes.getText().trim());
                         event.setAlert(choiceAlert.getSelectedItem().trim());
                         event.setRepeatEvent(choiceRepeat.getSelectedItem().trim());
                         try {
-                            event.saveEvent();
+                            int id = event.saveEvent();
                             JOptionPane.showMessageDialog(new Frame(), "Add event successful!", "Event Added", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                             JOptionPane.showMessageDialog(new Frame(), "Oops ... somethings went wrong!", "ERROR" , JOptionPane.ERROR_MESSAGE);
