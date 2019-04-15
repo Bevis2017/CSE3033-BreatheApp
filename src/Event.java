@@ -1,8 +1,14 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Base64;
+
 public class Event {
     private String name, type, location, time, date, notes;
     private int id;
     private int repeatEvent;
     private int alert;
+    private ArrayList<String> inviteeList = new ArrayList<>();
     private Exception EventNameEmptyException;
     private Exception EventTimeEmptyException;
     private Exception EventDateEmptyException;
@@ -10,6 +16,24 @@ public class Event {
 
     public Event() {
         db = new Database();
+    }
+
+    public Event(int id) {
+        db = new Database();
+        ResultSet rs = db.query("SELECT * FROM event WHERE id = " + id);
+        try {
+            rs.next();
+            setName(rs.getString("name"));
+            setLocation(rs.getString("location"));
+            setType(rs.getString("type"));
+            setDate(rs.getString("date"));
+            setTime(rs.getString("date"));
+            setRepeatEvent(rs.getString("repeatEvent"));
+            setAlert(rs.getString("alert"));
+            setNotes(rs.getString("notes"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -53,11 +77,11 @@ public class Event {
     }
 
     public String getNotes() {
-        return notes;
+        return base64ToString(notes);
     }
 
     public void setNotes(String notes) {
-        this.notes = notes;
+        this.notes = stringToBase64(notes.trim());
     }
 
     public int getId() {
@@ -155,8 +179,12 @@ public class Event {
         }
     }
 
-    public boolean saveEvent() throws Exception {
-        boolean status = false;
+    private String joinDateTime() {
+        return date + " " + time;
+    }
+
+    public int saveEvent() throws Exception {
+        int newEventId = 0;
 
         if (name.trim().length() == 0) {
             throw EventNameEmptyException;
@@ -165,15 +193,106 @@ public class Event {
         } else if (date.trim().length() == 0) {
             throw EventDateEmptyException;
         } else {
-            String query = "INSERT INTO event (name, type, location, time, date, repeatEvent, alert, notes) VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s')";
-            int rs = db.update(String.format(query, name, type, location, time, date, repeatEvent, alert, notes));
-            System.out.println("Result: " + rs);
+            String query = "INSERT INTO event (name, type, location, date, repeatEvent, alert, notes) VALUES ('%s', '%s', '%s', '%s', '%d', '%d', '%s')";
+            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes));
+            System.out.println("Save Event Result: " + rs);
 
             if (rs != 0) {
-                status = true;
+                Database db = new Database();
+                ResultSet lastInsert = db.getLastInsertId();
+                lastInsert.next();
+
+                newEventId = lastInsert.getInt("id");
+                System.out.println("getLastInsertId : " + lastInsert);
+                User user = new User();
+
+                for (String str : inviteeList) {
+                    int userId = user.getIdByName(str);
+                    if (userId != 0) {
+                        saveInvitee(newEventId, userId);
+                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                    } else {
+                        userId = user.getIdByEmail(str);
+                        saveInvitee(newEventId, userId);
+                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                    }
+                }
             }
         }
 
-        return status;
+        return newEventId;
+    }
+
+    public int updateEvent() throws Exception {
+        int newEventId = 0;
+
+        if (name.trim().length() == 0) {
+            throw EventNameEmptyException;
+        } else if (time.trim().length() == 0) {
+            throw EventTimeEmptyException;
+        } else if (date.trim().length() == 0) {
+            throw EventDateEmptyException;
+        } else {
+            String query = "UPDATE event SET name = '%s', type = '%s', location = '%s', date = '%s', repeatEvent = '%d', alert = '%d', notes = '%s' WHERE even_id = '%d'";
+            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, id));
+            System.out.println("Save Event Result: " + rs);
+
+            if (rs != 0) {
+                Database db = new Database();
+                ResultSet lastInsert = db.getLastInsertId();
+                lastInsert.next();
+
+                newEventId = lastInsert.getInt("id");
+                System.out.println("getLastInsertId : " + lastInsert);
+                User user = new User();
+
+                for (String str : inviteeList) {
+                    int userId = user.getIdByName(str);
+                    if (userId != 0) {
+                        saveInvitee(newEventId, userId);
+                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                    } else {
+                        userId = user.getIdByEmail(str);
+                        saveInvitee(newEventId, userId);
+                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                    }
+                }
+            }
+        }
+
+        return newEventId;
+    }
+
+    public void saveInvitee(int event_id, int user_id) {
+        String query = "INSERT INTO invitee (event_id, user_id) VALUES ('%d', '%d')";
+        ResultSet rs = db.query(String.format(query, event_id, user_id));
+        System.out.println("Save Invitee Result: " + rs);
+    }
+
+    public String stringToBase64(String str) {
+        System.out.println("Input String: " + str);
+
+        // Encode into Base64 format
+        String base64 = Base64.getEncoder().encodeToString(str.getBytes());
+
+        // print encoded String
+        System.out.println("Encoded String: " + base64);
+
+        return base64;
+    }
+
+    public String base64ToString(String base64) {
+        // print encoded String
+        System.out.println("Encoded String: " + base64);
+
+        // decode into String from encoded format
+        byte[] actualByte = Base64.getDecoder().decode(base64);
+
+        String actualString = new String(actualByte);
+
+        // print actual String
+        System.out.println("Actual String: " + actualString);
+
+        return actualString;
     }
 }

@@ -1,28 +1,17 @@
-import com.github.lgooddatepicker.components.*;
-import com.sun.media.jfxmedia.events.PlayerEvent;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePicker;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Panel;
-
-import java.awt.SystemColor;
-import java.awt.Font;
-import java.awt.Frame;
-
-import java.awt.TextArea;
-import java.awt.Choice;
-import java.awt.List;
-import java.awt.Button;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class AddEvent extends JFrame {
 
@@ -183,6 +172,7 @@ public class AddEvent extends JFrame {
         // Create a time picker, and add it to the form.
         TimePicker timePicker1 = new TimePicker();
         timePicker1.setBounds(586, 214, 336, 25);
+        timePicker1.setTimeToNow();
         contentPane.add(timePicker1);
 
         JLabel lblRepeat = new JLabel("Repeat");
