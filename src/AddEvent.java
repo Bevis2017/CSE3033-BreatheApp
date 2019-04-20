@@ -313,6 +313,8 @@ public class AddEvent extends JFrame {
                         event.setNotes(txtrNotes.getText().trim());
                         event.setAlert(choiceAlert.getSelectedItem().trim());
                         event.setRepeatEvent(choiceRepeat.getSelectedItem().trim());
+                        event.setInviteeHash(inviteeList.toString());
+                        event.setInviteeList(inviteeList);
                         try {
                             int id = event.saveEvent();
                             JOptionPane.showMessageDialog(new Frame(), "Add event successful!", "Event Added", JOptionPane.INFORMATION_MESSAGE);

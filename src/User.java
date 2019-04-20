@@ -1,17 +1,8 @@
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mysql.cj.exceptions.CJCommunicationsException;
-import com.sun.deploy.util.SessionState;
-import org.apache.commons.lang3.RandomStringUtils;
 import com.sendgrid.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
-import javax.jws.soap.SOAPBinding;
-import java.awt.*;
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
@@ -72,7 +63,7 @@ public class User {
     }
 
     public int getIdByName(String name) {
-        ResultSet rs = db.query(String.format("SELECT * FROM user WHERE name = '%s'", name));
+        ResultSet rs = db.query(String.format("SELECT * FROM user WHERE name = '%s'", name.trim()));
         int id = 0;
 
         try {

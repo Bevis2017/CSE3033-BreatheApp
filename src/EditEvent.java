@@ -1,39 +1,35 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePicker;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Panel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import java.awt.SystemColor;
-import java.awt.Font;
-import java.awt.Frame;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import java.awt.TextArea;
-import java.awt.Choice;
-import javax.swing.JTextPane;
-import java.awt.List;
-import javax.swing.JEditorPane;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import java.awt.Button;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditEvent extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtName;
-	private JTextField txtLocation;
+	private JTextField txtName = new JTextField();
+	private JTextField txtLocation = new JTextField();
 	private JTextField txtInvitees;
+	private JTextArea txtrNotes = new JTextArea();
+	private Choice choiceAlert, choiceRepeat, choiceType;
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private DatePickerSettings dateSettings = new DatePickerSettings();
+	private TimePicker timePicker1;
+	private DatePicker datePicker1;
+	private ArrayList<String> inviteeList = new ArrayList<>();
+	private SearchInvitees si;
+	private User user = new User();
+	private Event event;
+
 
 	/**
 	 * Launch the application.
@@ -42,7 +38,7 @@ public class EditEvent extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditEvent frame = new EditEvent();
+					EditEvent frame = new EditEvent(13);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,8 +50,11 @@ public class EditEvent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditEvent() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public EditEvent(int eventId) {
+		// pull data from db
+		event = new Event(eventId);
+
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -76,6 +75,30 @@ public class EditEvent extends JFrame {
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtName.getText().trim().length() > 0) {
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+					int dialogResult = JOptionPane.showConfirmDialog(
+							null,
+							"Are you sure you want to exit without save?",
+							"Closing",
+							dialogButton
+					);
+					if(dialogResult == JOptionPane.YES_OPTION) {
+						// YES
+						System.out.println("Option: YES");
+						dispose();
+					} else {
+						// NO
+						System.out.println("Option: NO");
+					}
+				} else {
+					dispose();
+				}
+			}
+		});
 		
 		JLabel lblImage = new JLabel("New label");
 		lblImage.setIcon(new ImageIcon(EditEvent.class.getResource("/image/V2[1].png")));
@@ -106,7 +129,7 @@ public class EditEvent extends JFrame {
 		lblRequired.setToolTipText("Event name is required.");
 		contentPane.add(lblRequired);
 		
-		txtName = new JTextField();
+		//txtName = new JTextField();
 		txtName.setColumns(5);
 		txtName.setBounds(586, 70, 336, 29);
 		contentPane.add(txtName);
@@ -116,7 +139,7 @@ public class EditEvent extends JFrame {
 		lblType.setBounds(424, 117, 101, 20);
 		contentPane.add(lblType);
 		
-		Choice choiceType = new Choice();
+		choiceType = new Choice();
 		choiceType.setBounds(586, 117, 336, 26);
 		choiceType.add("None");
 		choiceType.add("Work");
@@ -143,13 +166,24 @@ public class EditEvent extends JFrame {
 		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDate.setBounds(424, 258, 47, 20);
 		contentPane.add(lblDate);
+
+		// Create a date picker, and add it to the form.
+		datePicker1 = new DatePicker(dateSettings);
+		datePicker1.setBounds(586, 258, 336, 25);
+		datePicker1.setDateToToday();
+		contentPane.add(datePicker1);
+
+		// Create a time picker, and add it to the form.
+		timePicker1 = new TimePicker();
+		timePicker1.setBounds(586, 214, 336, 25);
+		contentPane.add(timePicker1);
 		
 		JLabel lblRepeat = new JLabel("Repeat");
 		lblRepeat.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRepeat.setBounds(424, 305, 101, 20);
 		contentPane.add(lblRepeat);
 		
-		Choice choiceRepeat = new Choice();
+		choiceRepeat = new Choice();
 		choiceRepeat.setBounds(586, 305, 336, 26);
 		choiceRepeat.add("Never");
 		choiceRepeat.add("Every Day");
@@ -164,7 +198,7 @@ public class EditEvent extends JFrame {
 		lblAlert.setBounds(424, 352, 101, 20);
 		contentPane.add(lblAlert);
 		
-		Choice choiceAlert = new Choice();
+		choiceAlert = new Choice();
 		choiceAlert.setBounds(586, 352, 336, 26);
 		choiceAlert.add("None");
 		choiceAlert.add("At time of event");
@@ -193,7 +227,7 @@ public class EditEvent extends JFrame {
 		textArea.setBounds(617, 224, 4, 22);
 		contentPane.add(textArea);
 		
-		JTextArea txtrNotes = new JTextArea();
+		//txtrNotes = new JTextArea();
 		txtrNotes.setText("Write something...");
 		txtrNotes.setEditable(true);
 		txtrNotes.setBounds(586, 399, 336, 80);
@@ -222,11 +256,83 @@ public class EditEvent extends JFrame {
 		btnEdit.setBackground(new Color(255, 182, 193));
 		btnEdit.setBounds(586, 540, 336, 29);
 		contentPane.add(btnEdit);
-		
-		JOptionPane.showMessageDialog(new Frame(), "Edit successful !");
-		JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Event name is required !");
-		JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Time is required !");
-		JOptionPane.showMessageDialog(new Frame(), "Cannot be empty ! Date is required !");
-		
+		btnEdit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// check invitee
+				boolean isInviteeValid = true;
+				if (txtInvitees.getText().length() > 0) {
+					// fix multiple space issue
+					String strInvitees = txtInvitees.getText().trim().replaceAll(" +", " ");
+					// convert string to arraylist
+					inviteeList = new ArrayList<>(Arrays.asList(strInvitees.split(",")));
+					System.out.println("Invitee List Count: " + inviteeList.size());
+					System.out.println("Invitee List: " + inviteeList.toString());
+
+					for (String str : inviteeList) {
+						boolean uname = user.isUserNameAvailable(str.trim());
+						boolean email = user.isUserEmailAvailable(str.trim());
+
+						if (uname && email) {
+							isInviteeValid = false;
+							JOptionPane.showMessageDialog(
+									new Frame(),
+									String.format("Invitee: %s \nInvalid user id / email !", str.trim()),
+									"User Not Found!",
+									JOptionPane.WARNING_MESSAGE
+							);
+							break;
+						}
+					}
+				}
+
+				if (isInviteeValid) {
+					// submit
+					if (txtName.getText().length() == 0) {
+						JOptionPane.showMessageDialog(new Frame(), "Event name is required ! \nCannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
+					} else if (timePicker1.getText().length() == 0) {
+						JOptionPane.showMessageDialog(new Frame(), "Time is required ! \nCannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
+					} else if (datePicker1.getText().length() == 0) {
+						JOptionPane.showMessageDialog(new Frame(), "Date is required ! \nCannot be empty!", "Warning", JOptionPane.WARNING_MESSAGE);
+					} else {
+						//Event event = new Event();
+						event.setName(txtName.getText().trim());
+						event.setTime(timePicker1.toString().trim());
+						event.setDate(datePicker1.toString().trim());
+						event.setLocation(txtLocation.getText().trim());
+						event.setType(choiceType.getSelectedItem().trim());
+						event.setNotes(txtrNotes.getText().trim());
+						event.setAlert(choiceAlert.getSelectedItem().trim());
+						event.setRepeatEvent(choiceRepeat.getSelectedItem().trim());
+						event.setInviteeHash(inviteeList.toString());
+						event.setInviteeList(inviteeList);
+						try {
+							int id = event.updateEvent();
+							JOptionPane.showMessageDialog(new Frame(), "Edit successful!", "Event Added", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+							JOptionPane.showMessageDialog(new Frame(), "Oops ... somethings went wrong!", "ERROR" , JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			}
+		});
+
+		// load data
+		txtName.setText(event.getName());
+		txtLocation.setText(event.getLocation());
+		txtrNotes.setText(event.getNotes());
+		timePicker1.setTime(LocalDateTime.parse(event.getDate(), dtf).toLocalTime());
+		datePicker1.setDate(LocalDateTime.parse(event.getDate(), dtf).toLocalDate());
+		choiceAlert.select(event.getAlert());
+		choiceRepeat.select(event.getRepeatEvent());
+		choiceType.select(event.getType());
+		String inviteeTxt = event.getInviteeHash();
+		inviteeTxt = inviteeTxt.substring(1, inviteeTxt.length() - 1);
+		txtInvitees.setText(inviteeTxt.trim().replaceAll(" +", " "));
+		System.out.println(String.format("[EditEvent] Alert: %s | Repeat: %s | Type: %s", event.getAlert(), event.getRepeatEvent(), event.getType()));
+
 	}
+
 }

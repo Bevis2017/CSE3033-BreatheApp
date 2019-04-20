@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class Event {
-    private String name, type, location, time, date, notes;
+    private String name, type, location, time, date, notes, inviteeHash;
     private int id;
     private int repeatEvent;
     private int alert;
@@ -23,14 +23,16 @@ public class Event {
         ResultSet rs = db.query("SELECT * FROM event WHERE id = " + id);
         try {
             rs.next();
+            this.id = id;
             setName(rs.getString("name"));
             setLocation(rs.getString("location"));
             setType(rs.getString("type"));
             setDate(rs.getString("date"));
             setTime(rs.getString("date"));
-            setRepeatEvent(rs.getString("repeatEvent"));
-            setAlert(rs.getString("alert"));
-            setNotes(rs.getString("notes"));
+            repeatEvent = rs.getInt("repeatEvent");
+            alert = rs.getInt("alert");
+            notes = rs.getString("notes");
+            inviteeHash = rs.getString("inviteeHash");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,55 +108,51 @@ public class Event {
                 return "Every Year";
             case 0:
             default:
-                return "None";
+                return "Never";
         }
     }
 
     public void setRepeatEvent(String str) {
         switch (str.trim()) {
             case "Every Day":
-                alert = 1;
+                repeatEvent = 1;
                 break;
             case "Every Week":
-                alert = 2;
+                repeatEvent = 2;
                 break;
             case "Every 2 Weeks":
-                alert = 3;
+                repeatEvent = 3;
                 break;
             case "Every Month":
-                alert = 4;
-            case "Every Year":
-                alert = 5;
+                repeatEvent = 4;
                 break;
-            case "None":
+            case "Every Year":
+                repeatEvent = 5;
+                break;
+            case "Never":
             default:
-                alert = 0;
+                repeatEvent = 0;
+                break;
         }
+        System.out.println(String.format("[Event][setRepeatEvent] Option: %s | ID: %d", str, alert));
     }
 
     public String getAlert() {
-        String strAlert = "None";
         switch (alert) {
-            case 0:
-                strAlert = "None";
-                break;
             case 1:
-                strAlert = "At time of event";
-                break;
+                return "At time of event";
             case 2:
-                strAlert = "30 minutes before";
-                break;
+                return "30 minutes before";
             case 3:
-                strAlert = "1 hour before";
-                break;
+                return "1 hour before";
             case 4:
-                strAlert = "1 day before";
-                break;
+                return "1 day before";
             case 5:
-                strAlert = "1 week before";
-                break;
+                return "1 week before";
+            case 0:
+            default:
+                return "None";
         }
-        return strAlert;
     }
 
     public void setAlert(String str) {
@@ -170,17 +168,33 @@ public class Event {
                 break;
             case "1 day before":
                 alert = 4;
+                break;
             case "1 week before":
                 alert = 5;
                 break;
             case "None":
             default:
                 alert = 0;
+                break;
         }
     }
 
     private String joinDateTime() {
         return date + " " + time;
+    }
+
+    public void setInviteeHash(String str) {
+        System.out.println("[Event][setInviteeHash] string: " + str);
+        inviteeHash = stringToBase64(str.trim());
+        System.out.println("[Event][setInviteeHash] hash: " + inviteeHash);
+    }
+
+    public String getInviteeHash() {
+        return base64ToString(inviteeHash);
+    }
+
+    public void setInviteeList(ArrayList<String> al) {
+        inviteeList = al;
     }
 
     public int saveEvent() throws Exception {
@@ -193,17 +207,23 @@ public class Event {
         } else if (date.trim().length() == 0) {
             throw EventDateEmptyException;
         } else {
-            String query = "INSERT INTO event (name, type, location, date, repeatEvent, alert, notes) VALUES ('%s', '%s', '%s', '%s', '%d', '%d', '%s')";
-            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes));
+            String query = "INSERT INTO event (name, type, location, date, repeatEvent, alert, notes, inviteeHash) VALUES ('%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s')";
+            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, inviteeHash));
             System.out.println("Save Event Result: " + rs);
 
             if (rs != 0) {
-                Database db = new Database();
-                ResultSet lastInsert = db.getLastInsertId();
-                lastInsert.next();
+                db = new Database();
+                String queryLastEventId = "SELECT * FROM event ORDER BY id DESC";
+                ResultSet lastEventId = db.query(queryLastEventId);
+                try {
+                    if (lastEventId.next()) {
+                        newEventId = lastEventId.getInt("id");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-                newEventId = lastInsert.getInt("id");
-                System.out.println("getLastInsertId : " + lastInsert);
+                System.out.println("Last Event ID : " + newEventId);
                 User user = new User();
 
                 for (String str : inviteeList) {
@@ -224,8 +244,6 @@ public class Event {
     }
 
     public int updateEvent() throws Exception {
-        int newEventId = 0;
-
         if (name.trim().length() == 0) {
             throw EventNameEmptyException;
         } else if (time.trim().length() == 0) {
@@ -233,57 +251,101 @@ public class Event {
         } else if (date.trim().length() == 0) {
             throw EventDateEmptyException;
         } else {
-            String query = "UPDATE event SET name = '%s', type = '%s', location = '%s', date = '%s', repeatEvent = '%d', alert = '%d', notes = '%s' WHERE even_id = '%d'";
-            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, id));
+            // get original invitee hash before update
+            String originalInviteeHash = getOriginalInviteeHash();
+
+            // update data in event table
+            String query = "UPDATE event SET name = '%s', type = '%s', location = '%s', date = '%s', repeatEvent = '%d', alert = '%d', notes = '%s', inviteeHash = '%s' WHERE id = '%d'";
+            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, inviteeHash, id));
             System.out.println("Save Event Result: " + rs);
 
             if (rs != 0) {
-                Database db = new Database();
-                ResultSet lastInsert = db.getLastInsertId();
-                lastInsert.next();
+                // check inviteeHash
+                System.out.println("Latest Invitee Hash: " + inviteeHash);
+                if (!inviteeHash.equals(originalInviteeHash)) {
+                    System.out.println("[Event] Invitee List Changed");
 
-                newEventId = lastInsert.getInt("id");
-                System.out.println("getLastInsertId : " + lastInsert);
-                User user = new User();
-
-                for (String str : inviteeList) {
-                    int userId = user.getIdByName(str);
-                    if (userId != 0) {
-                        saveInvitee(newEventId, userId);
-                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                    // delete all invitee of this event from db
+                    int rsDelete = deleteInviteeByEventId(id);
+                    if (rsDelete != 0) {
+                        System.out.println("Current Invitee Deleted.");
                     } else {
-                        userId = user.getIdByEmail(str);
-                        saveInvitee(newEventId, userId);
-                        System.out.println(String.format("Event ID: %d | User ID: %d", newEventId, userId));
+                        System.out.println("New Invitee Added.");
                     }
+
+                    // add new invitee
+                    for (String str : inviteeList) {
+                        // clean whitespace
+                        str = str.trim();
+                        User user = new User();
+                        int userId = user.getIdByName(str);
+
+                        // check invitee user id
+                        if (userId != 0) {
+                            saveInvitee(id, userId);
+                            System.out.println(String.format("Event ID: %d | User ID: %d | User Name: '%s'", id, userId, str));
+                        } else {
+                            userId = user.getIdByEmail(str);
+                            saveInvitee(id, userId);
+                            System.out.println(String.format("Event ID: %d | User ID: %d | User Name: '%s'", id, userId, str));
+                        }
+                    }
+                } else {
+                    System.out.println("[Event] Invitee List Not Changed");
                 }
+
             }
         }
 
-        return newEventId;
+        return id;
+    }
+
+    public String getOriginalInviteeHash() {
+        String queryGetInviteeHash = "SELECT * FROM event WHERE id = '%d'";
+        ResultSet rsInviteeHash = db.query(String.format(queryGetInviteeHash, id));
+        String hash = null;
+
+        try {
+            if (rsInviteeHash.next()) {
+                hash = rsInviteeHash.getString("inviteeHash");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Original Invitee Hash: " + hash);
+
+        return hash;
+    }
+
+    public int deleteInviteeByEventId(int eid) {
+        String query = "DELETE FROM invitee WHERE event_id ='%d'";
+        int rs = db.update(String.format(query, eid));
+
+        return rs;
     }
 
     public void saveInvitee(int event_id, int user_id) {
         String query = "INSERT INTO invitee (event_id, user_id) VALUES ('%d', '%d')";
-        ResultSet rs = db.query(String.format(query, event_id, user_id));
+        int rs = db.update(String.format(query, event_id, user_id));
         System.out.println("Save Invitee Result: " + rs);
     }
 
     public String stringToBase64(String str) {
-        System.out.println("Input String: " + str);
+        //System.out.println("Input String: " + str);
 
         // Encode into Base64 format
         String base64 = Base64.getEncoder().encodeToString(str.getBytes());
 
         // print encoded String
-        System.out.println("Encoded String: " + base64);
+        //System.out.println("Encoded String: " + base64);
 
         return base64;
     }
 
     public String base64ToString(String base64) {
         // print encoded String
-        System.out.println("Encoded String: " + base64);
+        //System.out.println("Encoded String: " + base64);
 
         // decode into String from encoded format
         byte[] actualByte = Base64.getDecoder().decode(base64);
@@ -291,7 +353,7 @@ public class Event {
         String actualString = new String(actualByte);
 
         // print actual String
-        System.out.println("Actual String: " + actualString);
+        //System.out.println("Actual String: " + actualString);
 
         return actualString;
     }
