@@ -13,12 +13,16 @@ public class Event {
     private Exception EventTimeEmptyException;
     private Exception EventDateEmptyException;
     private Database db;
+    private Token token = new Token();
 
     public Event() {
         db = new Database();
+        token.readToken();
     }
 
     public Event(int id) {
+        token.readToken();
+
         db = new Database();
         ResultSet rs = db.query("SELECT * FROM event WHERE id = " + id);
         try {
@@ -207,8 +211,8 @@ public class Event {
         } else if (date.trim().length() == 0) {
             throw EventDateEmptyException;
         } else {
-            String query = "INSERT INTO event (name, type, location, date, repeatEvent, alert, notes, inviteeHash) VALUES ('%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s')";
-            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, inviteeHash));
+            String query = "INSERT INTO event (name, type, location, date, repeatEvent, alert, notes, inviteeHash, createdBy) VALUES ('%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%d')";
+            int rs = db.update(String.format(query, name, type, location, joinDateTime(), repeatEvent, alert, notes, inviteeHash, token.getUserId()));
             System.out.println("Save Event Result: " + rs);
 
             if (rs != 0) {
@@ -298,6 +302,13 @@ public class Event {
         }
 
         return id;
+    }
+
+    public ResultSet getAllEventByUserId(int uid) {
+        String query = "SELECT * FROM event WHERE createdBy = '%d' OR id IN (SELECT event_id from invitee where user_id = '%d') ORDER BY date ASC";
+        ResultSet rs = db.query(String.format(query, uid, uid));
+
+        return rs;
     }
 
     public String getOriginalInviteeHash() {

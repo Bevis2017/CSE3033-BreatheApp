@@ -24,7 +24,6 @@ public class AddEvent extends JFrame {
     private DatePickerSettings dateSettings;
     private ArrayList<String> inviteeList = new ArrayList<>();
     private SearchInvitees si;
-    private User user = new User();
 
     /**
      * Launch the application.
@@ -277,6 +276,8 @@ public class AddEvent extends JFrame {
                     inviteeList = new ArrayList<>(Arrays.asList(txtInvitees.getText().split(",")));
                     System.out.println("Invitee List Count: " + inviteeList.size());
                     System.out.println("Invitee List: " + inviteeList.toString());
+
+                    User user = new User();
 
                     for (String str : inviteeList) {
                         boolean uname = user.isUserNameAvailable(str.trim());
