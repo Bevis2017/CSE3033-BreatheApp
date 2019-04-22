@@ -1,28 +1,14 @@
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Panel;
-import java.awt.SystemColor;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
+	private static Token token = new Token();
 
 	/**
 	 * Launch the application.
@@ -30,7 +16,7 @@ public class MainPage extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Token token = new Token();
+
 
 				try {
 					// check user detail
@@ -43,6 +29,7 @@ public class MainPage extends JFrame {
 
 				} catch (Exception e) {
 					e.printStackTrace();
+					new Login().setVisible(true);
 				}
 			}
 		});
@@ -98,6 +85,12 @@ public class MainPage extends JFrame {
 		btnViewCalendar.setBackground(new Color(255, 182, 193));
 		btnViewCalendar.setBounds(431, 169, 225, 68);
 		contentPane.add(btnViewCalendar);
+		btnViewCalendar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ViewCalender(token.getUserId()).setVisible(true);
+			}
+		});
 		
 		JButton btnAddFriend = new JButton("ADD FRIEND");
 		btnAddFriend.setForeground(Color.WHITE);
@@ -112,6 +105,12 @@ public class MainPage extends JFrame {
 		btnBreatheTime.setBackground(new Color(255, 182, 193));
 		btnBreatheTime.setBounds(431, 369, 225, 68);
 		contentPane.add(btnBreatheTime);
+		btnBreatheTime.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new BreatheTime().setVisible(true);
+			}
+		});
 		
 		JButton btnSummary = new JButton("MY SUMMARY");
 		btnSummary.setForeground(Color.WHITE);

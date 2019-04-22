@@ -1,30 +1,13 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Panel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import java.awt.SystemColor;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import java.awt.TextArea;
-import java.awt.Choice;
-import javax.swing.JTextPane;
-import java.awt.List;
-import javax.swing.JEditorPane;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import java.awt.Button;
-import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ViewCalender extends JFrame {
 
@@ -37,7 +20,7 @@ public class ViewCalender extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewCalender frame = new ViewCalender();
+					ViewCalender frame = new ViewCalender(12);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +32,10 @@ public class ViewCalender extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewCalender() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public ViewCalender(int uid) {
+		Event event = new Event();
+
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 650);
 		setTitle("Breathe Application");
 		contentPane = new JPanel();
@@ -72,6 +57,12 @@ public class ViewCalender extends JFrame {
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblImage = new JLabel("");
 		lblImage.setIcon(new ImageIcon(ViewCalender.class.getResource("/image/445px-Blue_calendar_icon_with_dates_crossed_out.svg[1].png")));
@@ -84,8 +75,46 @@ public class ViewCalender extends JFrame {
 		btnViewActivities.setBackground(Color.WHITE);
 		btnViewActivities.setBounds(543, 0, 291, 60);
 		contentPane.add(btnViewActivities);
-		
-		JScrollPane calScrollPane = new JScrollPane();
+
+		// Data to be displayed in the JTable
+		String[][] data = new String[100][3];
+		ResultSet rsEventList = event.getAllEventByUserId(uid);
+		int rowCount = 0;
+
+		try {
+			while (rsEventList.next()) {
+				data[rowCount][0] = rsEventList.getString("date");
+				data[rowCount][1] = rsEventList.getString("name");
+				data[rowCount][2] = rsEventList.getString("type");
+				rowCount++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Column Names
+		String[] columnNames = { "Date & Time", "Event Name", "Event Type" };
+
+		// Initializing the JTable
+		JTable jTable = new JTable(data, columnNames);
+		//jTable.setBounds(30, 40, 200, 300);
+
+		ListSelectionModel select= jTable.getSelectionModel();
+		select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		select.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				String Data = null;
+				int[] row = jTable.getSelectedRows();
+				int[] columns = jTable.getSelectedColumns();
+				for (int i = 0; i < row.length; i++) {
+					for (int j = 0; j < columns.length; j++) {
+						Data = (String) jTable.getValueAt(row[i], columns[j]);
+					} }
+				System.out.println("Table element selected is: " + Data);
+			}
+		});
+
+		JScrollPane calScrollPane = new JScrollPane(jTable);
 		calScrollPane.setBounds(417, 76, 525, 416);
 		contentPane.add(calScrollPane);
 		

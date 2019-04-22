@@ -1,28 +1,9 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Panel;
-import java.awt.SystemColor;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
-import java.awt.Button;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RecycleBin extends JFrame {
 
@@ -48,7 +29,7 @@ public class RecycleBin extends JFrame {
 	 * Create the frame.
 	 */
 	public RecycleBin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 650);
 		setTitle("Breathe Application");
 		contentPane = new JPanel();
@@ -70,6 +51,12 @@ public class RecycleBin extends JFrame {
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblImage = new JLabel("");
 		lblImage.setIcon(new ImageIcon(RecycleBin.class.getResource("/image/1-512[1].png")));

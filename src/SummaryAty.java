@@ -1,19 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Panel;
-import javax.swing.JButton;
-import java.awt.SystemColor;
-import java.awt.Font;
-import javax.swing.JLabel;
-import java.awt.Button;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SummaryAty extends JFrame {
 
@@ -40,7 +29,7 @@ public class SummaryAty extends JFrame {
 	 */
 	public SummaryAty() {
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -56,15 +45,16 @@ public class SummaryAty extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnBack = new JButton("BACK");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(15, 16, 115, 29);
 		panel.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblImage = new JLabel("");
 		lblImage.setIcon(new ImageIcon(SummaryAty.class.getResource("/image/web-analytics-data-analysis[1].png")));

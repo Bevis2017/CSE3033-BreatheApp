@@ -306,9 +306,8 @@ public class Event {
 
     public ResultSet getAllEventByUserId(int uid) {
         String query = "SELECT * FROM event WHERE createdBy = '%d' OR id IN (SELECT event_id from invitee where user_id = '%d') ORDER BY date ASC";
-        ResultSet rs = db.query(String.format(query, uid, uid));
 
-        return rs;
+        return db.query(String.format(query, uid, uid));
     }
 
     public String getOriginalInviteeHash() {

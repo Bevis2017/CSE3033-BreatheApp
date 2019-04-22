@@ -14,7 +14,7 @@ public class BreatheTime extends JFrame {
      */
     public BreatheTime() {
         setBackground(Color.WHITE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1000, 650);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
