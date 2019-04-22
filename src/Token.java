@@ -1,8 +1,6 @@
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import sun.security.provider.MD5;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -10,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Token {
+    private int userId;
     private String token;
     private boolean rememberMe;
 
@@ -18,6 +17,7 @@ public class Token {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(new FileReader("token.json"));
 
+            userId = Integer.parseInt(json.get("userId").toString());
             token = String.valueOf(json.get("token"));
             rememberMe = Boolean.valueOf(String.valueOf(json.get("rememberMe")));
             return true;
@@ -31,6 +31,7 @@ public class Token {
 
     public void saveToken() {
         JSONObject obj = new JSONObject();
+        obj.put("userId", userId);
         obj.put("token", token);
         obj.put("rememberMe", rememberMe);
 
@@ -44,6 +45,10 @@ public class Token {
     }
 
     public void generateToken(String email) {
+        User user = new User();
+        userId = user.getIdByEmail(email.trim());
+        System.out.println("[Token][generateToken] User ID: " + userId);
+
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         token = encodeMD5(email + ": " + timeStamp);
     }
@@ -55,6 +60,11 @@ public class Token {
 
     public String getToken() {
         return token;
+    }
+
+    public int getUserId() {
+        System.out.println("[Token][getUserId] User ID: " + userId);
+        return userId;
     }
 
     public boolean getRememberMe() {
@@ -96,6 +106,7 @@ public class Token {
         //t.saveToken();
         t.readToken();
 
-        System.out.println("GET TOKEN: " + t.readToken());
+
+        System.out.println("GET TOKEN: " + t.readToken() + " | User ID: " + t.getUserId());
     }
 }
