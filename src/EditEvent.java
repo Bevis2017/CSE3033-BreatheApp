@@ -26,7 +26,6 @@ public class EditEvent extends JFrame {
 	private TimePicker timePicker1;
 	private DatePicker datePicker1;
 	private ArrayList<String> inviteeList = new ArrayList<>();
-	private SearchInvitees si;
 	private User user = new User();
 	private Event event;
 
