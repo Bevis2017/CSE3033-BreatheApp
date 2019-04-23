@@ -213,6 +213,7 @@ public class AddEvent extends JFrame {
         lblInvitees.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblInvitees.setBounds(424, 493, 101, 20);
         contentPane.add(lblInvitees);
+        lblInvitees.setToolTipText("Use the symbol ',' for adding more than one invitees.");
 
         txtInvitees = new JTextField();
         txtInvitees.setColumns(5);
