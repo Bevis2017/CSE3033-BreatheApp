@@ -15,7 +15,8 @@ public class BreatheTime extends JFrame {
     public BreatheTime() {
         setBackground(Color.WHITE);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1000, 650);
+        setBounds(100, 100, 1000, 630);
+        setResizable(false);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +65,7 @@ public class BreatheTime extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 WebBrowser wb = new WebBrowser();
                 wb.setTitle("MUSIC TIME");
-                wb.setSize(540, 95);
+                wb.setSize(530, 110);
                 wb.loadLocalPage("/html/MusicTime.html");
             }
         });
@@ -80,7 +81,7 @@ public class BreatheTime extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 WebBrowser wb = new WebBrowser();
                 wb.setTitle("BREATHE TIME");
-                wb.setSize(720, 450);
+                wb.setSize(700, 450);
                 wb.loadLocalPage("/html/BreathePlayer.html");
             }
         });

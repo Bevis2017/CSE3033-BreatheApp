@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ViewCalender extends JFrame {
+public class ViewAllEvent extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,7 +20,7 @@ public class ViewCalender extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewCalender frame = new ViewCalender(12);
+					ViewAllEvent frame = new ViewAllEvent(12);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,11 +32,12 @@ public class ViewCalender extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewCalender(int uid) {
+	public ViewAllEvent(int uid) {
 		Event event = new Event();
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 650);
+		setBounds(100, 100, 1000, 630);
+		setResizable(false);
 		setTitle("Breathe Application");
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -65,7 +66,7 @@ public class ViewCalender extends JFrame {
 		});
 		
 		JLabel lblImage = new JLabel("");
-		lblImage.setIcon(new ImageIcon(ViewCalender.class.getResource("/image/445px-Blue_calendar_icon_with_dates_crossed_out.svg[1].png")));
+		lblImage.setIcon(new ImageIcon(ViewAllEvent.class.getResource("/image/445px-Blue_calendar_icon_with_dates_crossed_out.svg[1].png")));
 		lblImage.setBounds(-18, 72, 405, 491);
 		panel.add(lblImage);
 		
@@ -97,6 +98,8 @@ public class ViewCalender extends JFrame {
 
 		// Initializing the JTable
 		JTable jTable = new JTable(data, columnNames);
+		// Set enabled
+		jTable.setEnabled(false);
 		//jTable.setBounds(30, 40, 200, 300);
 
 		ListSelectionModel select= jTable.getSelectionModel();

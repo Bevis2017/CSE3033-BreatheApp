@@ -30,7 +30,8 @@ public class ViewMyActivity extends JFrame {
 	 */
 	public ViewMyActivity() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 650);
+		setBounds(100, 100, 1000, 630);
+		setResizable(false);
 		setTitle("Breathe Application");
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);

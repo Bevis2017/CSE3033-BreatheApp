@@ -23,7 +23,6 @@ public class AddEvent extends JFrame {
     private JTextField textFieldDate;
     private DatePickerSettings dateSettings;
     private ArrayList<String> inviteeList = new ArrayList<>();
-    private SearchInvitees si;
 
     /**
      * Launch the application.
@@ -46,7 +45,8 @@ public class AddEvent extends JFrame {
      */
     public AddEvent() {
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1000, 650);
+        setBounds(100, 100, 1000, 630);
+        setResizable(false);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

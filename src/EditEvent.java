@@ -55,7 +55,8 @@ public class EditEvent extends JFrame {
 		event = new Event(eventId);
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 650);
+		setBounds(100, 100, 1000, 630);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

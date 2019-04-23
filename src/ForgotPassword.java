@@ -1,29 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import java.awt.Panel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.Frame;
-
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import java.awt.Button;
-import java.awt.SystemColor;
-import javax.swing.JScrollBar;
-import java.awt.Scrollbar;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 public class ForgotPassword extends JFrame {
 
@@ -53,7 +32,8 @@ public class ForgotPassword extends JFrame {
 	public ForgotPassword() {
 		setBackground(Color.WHITE);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 500);
+		setBounds(100, 100, 850, 480);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

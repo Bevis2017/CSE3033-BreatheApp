@@ -1,28 +1,6 @@
-
-
-import sun.security.krb5.internal.crypto.dk.ArcFourCrypto;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Frame;
-
-import javax.swing.JRadioButton;
-import javax.swing.JPasswordField;
-import java.awt.Panel;
-import javax.swing.JTextArea;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
-import java.awt.Button;
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -30,10 +8,6 @@ import java.awt.event.FocusListener;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.UIManager;
 
 public class SignUp extends JFrame {
 
@@ -66,7 +40,8 @@ public class SignUp extends JFrame {
 	public SignUp() {
 		setBackground(Color.WHITE);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 500);
+		setBounds(100, 100, 850, 480);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("");
 		contentPane.setBackground(Color.WHITE);
