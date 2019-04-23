@@ -4,6 +4,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class SettingPage extends JFrame {
 
@@ -12,6 +14,7 @@ public class SettingPage extends JFrame {
 	private JTextField userNaTxt;
 	private JTextField emailTxt;
 	private JTextField passwordTxt;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -20,7 +23,7 @@ public class SettingPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SettingPage frame = new SettingPage();
+					SettingPage frame = new SettingPage(12);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +35,9 @@ public class SettingPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SettingPage() {
+	public SettingPage(int uid) {
+		user = new User(uid);
+
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 630);
 		setResizable(false);
@@ -152,5 +157,21 @@ public class SettingPage extends JFrame {
 		contentPane.add(btnYesDeleteAccount);
 
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
+
+		userIDTxt.setText(String.valueOf(user.getUserId()));
+		emailTxt.setText(user.getUserEmail());
+		userNaTxt.setText(user.getUserName());
+		passwordTxt.setText("**********");
+		passwordTxt.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				passwordTxt.setText(user.getUserPwd());
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				passwordTxt.setText("**********");
+			}
+		});
 	}
 }

@@ -9,12 +9,46 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class User {
-    private String userId, userEmail, userName, userPwd;
+    private int userId;
+    private String userEmail, userName, userPwd;
     private static Database db;
 
     public User() {
         // constructor
         db = new Database();
+    }
+
+    public User(int uid) {
+        // constructor
+        db = new Database();
+
+        ResultSet rs = db.query(String.format("SELECT * FROM user WHERE id = '%d'", uid));
+
+        try {
+            rs.next();
+            userId = rs.getInt("id");
+            userEmail = rs.getString("email");
+            userName = rs.getString("name");
+            userPwd = rs.getString("password");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
     }
 
     public boolean isUserNameAvailable(String un) {

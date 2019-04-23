@@ -128,7 +128,7 @@ public class MainPage extends JFrame {
 		btnSetting.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new SettingPage().setVisible(true);
+				new SettingPage(token.getUserId()).setVisible(true);
 			}
 		});
 
