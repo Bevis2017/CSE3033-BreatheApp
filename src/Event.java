@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class Event {
             inviteeHash = rs.getString("inviteeHash");
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(new Frame(), "Event ID not found or the event has been removed!", "Oops, something went wrong ...", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -83,7 +86,11 @@ public class Event {
     }
 
     public String getNotes() {
-        return base64ToString(notes);
+        String plainNotes = base64ToString(notes);
+        if (plainNotes.equalsIgnoreCase("Write something...")) {
+            plainNotes = "";
+        }
+        return plainNotes;
     }
 
     public void setNotes(String notes) {
@@ -339,6 +346,19 @@ public class Event {
         String query = "INSERT INTO invitee (event_id, user_id) VALUES ('%d', '%d')";
         int rs = db.update(String.format(query, event_id, user_id));
         System.out.println("Save Invitee Result: " + rs);
+    }
+
+    //
+    public int deleteEvent(int eid) {
+        String query = "DELETE FROM event WHERE id ='%d'";
+        int rs = db.update(String.format(query, eid));
+
+        if (rs > 0) {
+            deleteInviteeByEventId(eid);
+            System.out.println("[Event][deleteEvent] (" + rs + ") The Event ID #" + eid + " has been removed.");
+        }
+
+        return rs;
     }
 
     public String stringToBase64(String str) {

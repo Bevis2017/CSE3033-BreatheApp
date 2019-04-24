@@ -38,7 +38,8 @@ public class Token {
         try (FileWriter file = new FileWriter("token.json")) {
             file.write(obj.toJSONString());
             System.out.println("Successfully Copied JSON Object to File...");
-            System.out.println("\nJSON Object: " + obj);
+            System.out.println("JSON Object: " + obj);
+            file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DeleteEvent extends JFrame {
 
@@ -13,8 +15,8 @@ public class DeleteEvent extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeleteEvent frame = new DeleteEvent();
-					frame.setVisible(true);
+					//DeleteEvent frame = new DeleteEvent();
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -25,9 +27,9 @@ public class DeleteEvent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeleteEvent() {
+	public DeleteEvent(ViewDetailsEvent jFrame, int eid) {
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -49,6 +51,21 @@ public class DeleteEvent extends JFrame {
 		btnOk.setBackground(new Color(255, 182, 193));
 		btnOk.setBounds(82, 136, 136, 29);
 		contentPane.add(btnOk);
+		btnOk.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = new Event().deleteEvent(eid);
+				if (result > 0) {
+					JOptionPane.showMessageDialog(new Frame(), "Delete successful !");
+					ViewDetailsEvent jf = jFrame;
+					jf.dispose();
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(new Frame(), "Oops, something went wrong ...");
+				}
+
+			}
+		});
 		
 		Button btnCancel = new Button("CANCEL");
 		btnCancel.setForeground(Color.WHITE);
@@ -56,8 +73,11 @@ public class DeleteEvent extends JFrame {
 		btnCancel.setBackground(new Color(255, 182, 193));
 		btnCancel.setBounds(260, 136, 136, 29);
 		contentPane.add(btnCancel);
-		
-		JOptionPane.showMessageDialog(new Frame(), "Delete sucessful !");
-		
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 	}
 }
