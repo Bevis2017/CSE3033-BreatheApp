@@ -74,12 +74,12 @@ public class SummaryAty extends JFrame {
 		lblSummary.setBounds(516, 29, 319, 60);
 		contentPane.add(lblSummary);
 		
-		Button lblDaily = new Button("DAILY");
-		lblDaily.setForeground(Color.WHITE);
-		lblDaily.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblDaily.setBackground(new Color(255, 182, 193));
-		lblDaily.setBounds(516, 150, 302, 80);
-		contentPane.add(lblDaily);
+		Button btnDaily = new Button("DAILY");
+		btnDaily.setForeground(Color.WHITE);
+		btnDaily.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnDaily.setBackground(new Color(255, 182, 193));
+		btnDaily.setBounds(516, 150, 302, 80);
+		contentPane.add(btnDaily);
 		
 		Button btnWeekly = new Button("WEEKLY");
 		btnWeekly.setForeground(Color.WHITE);
