@@ -32,6 +32,7 @@ public class Token {
             rememberMe = Boolean.valueOf(String.valueOf(json.get("rememberMe")));
             return true;
         } catch (FileNotFoundException e) {
+            System.out.println("[Token][readToken] Token File Not Found!");
             return false;
         } catch (ParseException | IOException e) {
             e.printStackTrace();

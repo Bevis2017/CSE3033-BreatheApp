@@ -146,5 +146,12 @@ public class MainPage extends JFrame {
 		});
 
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
+
+		// run alert module, check for conflicts in activities
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new AlertModule(token.getUserId());
+			}
+		});
 	}
 }

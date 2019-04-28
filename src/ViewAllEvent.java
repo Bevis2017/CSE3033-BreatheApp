@@ -190,4 +190,8 @@ public class ViewAllEvent extends JFrame {
             }
         };
     }
+
+    private void checkEvent() {
+        //String query = "SELECT * FROM event WHERE "
+    }
 }

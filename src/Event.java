@@ -311,8 +311,16 @@ public class Event {
         return id;
     }
 
+    // get all active event of the user
     public ResultSet getAllEventByUserId(int uid) {
-        String query = "SELECT * FROM event WHERE createdBy = '%d' OR id IN (SELECT event_id from invitee where user_id = '%d') ORDER BY date ASC";
+        String query = "SELECT * FROM event WHERE date >= NOW() AND createdBy = '%d' OR id IN (SELECT event_id FROM invitee WHERE user_id = '%d') ORDER BY date ASC";
+
+        return db.query(String.format(query, uid, uid));
+    }
+
+    // get all event on today by user id
+    public ResultSet getAllTodayActiveEventByUserId(int uid) {
+        String query = "SELECT * FROM event WHERE date >= NOW() AND date(date) = CURDATE() AND createdBy = '%d' OR id IN (SELECT event_id FROM invitee WHERE user_id = '%d') ORDER BY date ASC";
 
         return db.query(String.format(query, uid, uid));
     }
