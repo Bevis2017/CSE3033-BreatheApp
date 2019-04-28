@@ -12,6 +12,16 @@ public class Token {
     private String token;
     private boolean rememberMe;
 
+    public static void main(String[] args) {
+        Token t = new Token();
+        //t.generateToken("admin");
+        //t.setRememberMe(true);
+        //t.saveToken();
+        t.readToken();
+
+        System.out.println("GET TOKEN: " + t.readToken() + " | User ID: " + t.getUserId());
+    }
+
     public boolean readToken() {
         try {
             JSONParser parser = new JSONParser();
@@ -39,7 +49,6 @@ public class Token {
             file.write(obj.toJSONString());
             System.out.println("Successfully Copied JSON Object to File...");
             System.out.println("JSON Object: " + obj);
-            file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,11 +61,6 @@ public class Token {
 
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         token = encodeMD5(email + ": " + timeStamp);
-    }
-
-    public void setRememberMe(boolean remember) {
-        System.out.println("Remember Me: " + remember);
-        rememberMe = remember;
     }
 
     public String getToken() {
@@ -72,6 +76,11 @@ public class Token {
         return rememberMe;
     }
 
+    public void setRememberMe(boolean remember) {
+        System.out.println("Remember Me: " + remember);
+        rememberMe = remember;
+    }
+
     public void deleteToken() {
         token = null;
 
@@ -82,7 +91,6 @@ public class Token {
         } else {
             System.out.println("Failed to delete the Token.");
         }
-
     }
 
     private String encodeMD5(String md5) {
@@ -98,16 +106,5 @@ public class Token {
             //
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        Token t = new Token();
-        //t.generateToken("admin");
-        //t.setRememberMe(true);
-        //t.saveToken();
-        t.readToken();
-
-
-        System.out.println("GET TOKEN: " + t.readToken() + " | User ID: " + t.getUserId());
     }
 }
