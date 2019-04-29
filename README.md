@@ -2,7 +2,6 @@
 2019 CSE3033 Software Engineering Assignment 1 - Breathe App
 
 ## Java Library
----
 This project uses these third-party Java libraries.
 
 - `mysql-connector-java-8.0.15`
