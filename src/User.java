@@ -223,6 +223,13 @@ public class User {
         return matcher.find();
     }
 
+    public int deleteUser(int uid) {
+        String query = "DELETE FROM user WHERE id = '%d'";
+        int rs = db.update(String.format(query, uid));
+
+        return rs;
+    }
+
     public static void main(String[] args) {
         User u = new User();
         if (u.createAccount("admin2", "me@google.com", "abc123")) {
