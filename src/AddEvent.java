@@ -196,7 +196,7 @@ public class AddEvent extends JFrame {
 
         Choice choiceAlert = new Choice();
         choiceAlert.setBounds(586, 352, 336, 26);
-        choiceAlert.add("None");
+        //choiceAlert.add("None");
         choiceAlert.add("At time of event");
         choiceAlert.add("30 minutes before");
         choiceAlert.add("1 hour before");

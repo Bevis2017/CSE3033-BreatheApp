@@ -153,7 +153,8 @@ public class SettingPage extends JFrame {
                     // YES
                     System.out.println("Option: YES");
                     user.deleteUser(user.getUserId());
-                    dispose();
+                    //dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Your account is deleted! \n\nBye ~\n\n", "Account Deleted" , JOptionPane.INFORMATION_MESSAGE);
                     Token token = new Token();
                     token.deleteToken();
                     System.exit(0);
