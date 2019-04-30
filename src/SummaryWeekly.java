@@ -38,6 +38,7 @@ public class SummaryWeekly extends JFrame {
 
         ChartPanel panel=new ChartPanel(chart);
         setContentPane(panel);
+        //panel.setMouseWheelEnabled(false);
     }
 
     private CategoryDataset createDataset() {
@@ -64,8 +65,20 @@ public class SummaryWeekly extends JFrame {
             dataset.addValue(weeklyLeisure.getInt("count"), "Leisure", weekly );
             dataset.addValue(weeklyPriority.getInt("count"), "Priority", weekly );
 
-            if (weeklyNone.getInt("count")== 0 && weeklyWork.getInt("count")== 0 && weeklyLeisure.getInt("count")== 0 && weeklyPriority.getInt("count")== 0){
-                JOptionPane.showMessageDialog(new Frame(), "No event on this week!");
+            int countNumber;
+            countNumber = weeklyNone.getInt("count") + weeklyWork.getInt("count") + weeklyLeisure.getInt("count") + weeklyPriority.getInt("count");
+
+            if (countNumber == 0){
+                JOptionPane.showMessageDialog(null,"No event on this week!","Amount of events", JOptionPane.PLAIN_MESSAGE);
+            }else if (countNumber > 0 && countNumber <= 10){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this week: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is low !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else if (countNumber > 10 && countNumber <= 15){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this week: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is medium !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this week: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is high !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
             }
 
         } catch (SQLException e) {

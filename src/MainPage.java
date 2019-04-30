@@ -151,6 +151,8 @@ public class MainPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new AlertModule(token.getUserId());
+
+
 			}
 		});
 	}

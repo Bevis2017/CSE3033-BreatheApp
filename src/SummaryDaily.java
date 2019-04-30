@@ -38,6 +38,7 @@ public class SummaryDaily extends JFrame {
 
         ChartPanel panel=new ChartPanel(chart);
         setContentPane(panel);
+        //panel.setMouseWheelEnabled(false);
     }
 
     private CategoryDataset createDataset() {
@@ -64,8 +65,20 @@ public class SummaryDaily extends JFrame {
             dataset.addValue(dailyLeisure.getInt("count"), "Leisure", daily );
             dataset.addValue(dailyPriority.getInt("count"), "Priority", daily );
 
-            if (dailyNone.getInt("count")== 0 && dailyWork.getInt("count")== 0 && dailyLeisure.getInt("count")== 0 && dailyPriority.getInt("count")== 0){
-                JOptionPane.showMessageDialog(new Frame(), "No event on today!");
+            int countNumber;
+            countNumber = dailyNone.getInt("count") + dailyWork.getInt("count") +dailyLeisure.getInt("count") + dailyPriority.getInt("count");
+
+            if (countNumber == 0){
+                JOptionPane.showMessageDialog(null,"No event on today!","Amount of events", JOptionPane.PLAIN_MESSAGE);
+            }else if (countNumber > 0 && countNumber <= 3){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on today: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is low !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else if (countNumber > 3 && countNumber <= 6){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on today: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is medium !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,"The total amount of activities on today: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is high !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
             }
 
         } catch (SQLException e) {

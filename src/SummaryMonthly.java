@@ -37,6 +37,7 @@ public class SummaryMonthly extends JFrame {
         );
 
         ChartPanel panel=new ChartPanel(chart);
+        //panel.setMouseWheelEnabled(false);
         setContentPane(panel);
     }
 
@@ -48,24 +49,36 @@ public class SummaryMonthly extends JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         String query = "SELECT COUNT(id) AS count FROM event WHERE type = '%s' AND createdBy = '%d' AND MONTH(date) = MONTH(CURRENT_DATE())";
-        ResultSet montlyNone = db.query(String.format(query, "None", token.getUserId()));
-        ResultSet montlyWork = db.query(String.format(query, "Work", token.getUserId()));
-        ResultSet montlyLeisure = db.query(String.format(query, "Leisure", token.getUserId()));
-        ResultSet montlyPriority = db.query(String.format(query, "Priority", token.getUserId()));
+        ResultSet monthlyNone = db.query(String.format(query, "None", token.getUserId()));
+        ResultSet monthlyWork = db.query(String.format(query, "Work", token.getUserId()));
+        ResultSet monthlyLeisure = db.query(String.format(query, "Leisure", token.getUserId()));
+        ResultSet monthlyPriority = db.query(String.format(query, "Priority", token.getUserId()));
 
         try {
-            montlyNone.next();
-            montlyWork.next();
-            montlyLeisure.next();
-            montlyPriority.next();
+            monthlyNone.next();
+            monthlyWork.next();
+            monthlyLeisure.next();
+            monthlyPriority.next();
 
-            dataset.addValue(montlyNone.getInt("count"),"None", monthly );
-            dataset.addValue(montlyWork.getInt("count"), "Work", monthly );
-            dataset.addValue(montlyLeisure.getInt("count"), "Leisure", monthly );
-            dataset.addValue(montlyPriority.getInt("count"), "Priority", monthly );
+            dataset.addValue(monthlyNone.getInt("count"),"None", monthly );
+            dataset.addValue(monthlyWork.getInt("count"), "Work", monthly );
+            dataset.addValue(monthlyLeisure.getInt("count"), "Leisure", monthly );
+            dataset.addValue(monthlyPriority.getInt("count"), "Priority", monthly );
 
-            if (montlyNone.getInt("count")== 0 && montlyWork.getInt("count")== 0 && montlyLeisure.getInt("count")== 0 && montlyPriority.getInt("count")== 0){
-                JOptionPane.showMessageDialog(new Frame(), "No event on this month!");
+            int countNumber;
+            countNumber = monthlyNone.getInt("count") + monthlyWork.getInt("count") + monthlyLeisure.getInt("count") + monthlyPriority.getInt("count");
+
+            if (countNumber == 0){
+                JOptionPane.showMessageDialog(null,"No event on this month!","Amount of events", JOptionPane.PLAIN_MESSAGE);
+            }else if (countNumber > 0 && countNumber <= 25){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this month: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is low !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else if (countNumber > 25 && countNumber <= 35){
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this month: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is medium !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,"The total amount of activities on this month: " + countNumber ,"Amount of events", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The level of rush is high !" ,"Level of rush", JOptionPane.PLAIN_MESSAGE);
             }
 
         } catch (SQLException e) {

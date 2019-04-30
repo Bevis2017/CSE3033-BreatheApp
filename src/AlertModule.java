@@ -26,6 +26,9 @@ public class AlertModule {
 
         try {
             while (rsTodayEvents.next()) {
+                //debug
+                System.out.println("getRow(): " + rsTodayEvents.getRow());
+
                 // get event date and set timer
                 String eventDate = rsTodayEvents.getString("date");
                 //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -80,7 +83,8 @@ public class AlertModule {
                     public void run() {
                         // show alert msg
                         String msg = "%s, details as below: \n\nEvent Name: %s \nTime: %s \nLocation: %s \nNotes: %s";
-                        String fullMsg = String.format(msg, msgTime, event.getName(), event.getTime(), event.getLocation(), event.getNotes());
+                        String fullMsg = String.format(msg, msgTime, tempEvent.getName(), tempEvent.getTime(), tempEvent.getLocation(), tempEvent.getNotes());
+                        Toolkit.getDefaultToolkit().beep(); // alert sound
                         JOptionPane.showMessageDialog(new Frame(), fullMsg, "You have an event!", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }, date);
@@ -94,6 +98,5 @@ public class AlertModule {
     public static void main(String[] args) {
         //obj = new AlertModule();
         new AlertModule(17);
-
     }
 } 
