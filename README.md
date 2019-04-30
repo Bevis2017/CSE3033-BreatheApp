@@ -4,7 +4,7 @@
 ## Instructions:
 1. Copy the Github link `https://github.com/Bevis2017/CSE3033-BreatheApp`
 2. Open IntelliJ IDEA.
-3. Choose 
+3. Choose `Check out from Version Control` -> `Git`, paste the Github link in `URL` field and press `Clone`.
 4. Under Project -> `src` (right-click) -> Mark Directory as -> Resources Root
 5. Setup SDK (top right) -> 1.8.0
 6. File -> Project Structure -> Libraries(tab):
