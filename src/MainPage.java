@@ -39,6 +39,9 @@ public class MainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MainPage() {
+		// load user details (token.json)
+		token.readToken();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 630);
 		setResizable(false);
@@ -151,8 +154,6 @@ public class MainPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new AlertModule(token.getUserId());
-
-
 			}
 		});
 	}

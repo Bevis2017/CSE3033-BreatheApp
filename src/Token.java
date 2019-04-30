@@ -1,3 +1,4 @@
+import org.apache.commons.io.FileDeleteStrategy;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,11 +26,14 @@ public class Token {
     public boolean readToken() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(new FileReader("token.json"));
+            FileReader fr = new FileReader("token.json");
+            JSONObject json = (JSONObject) parser.parse(fr);
+            fr.close();
 
             userId = Integer.parseInt(json.get("userId").toString());
             token = String.valueOf(json.get("token"));
             rememberMe = Boolean.valueOf(String.valueOf(json.get("rememberMe")));
+
             return true;
         } catch (FileNotFoundException e) {
             System.out.println("[Token][readToken] Token File Not Found!");
@@ -48,6 +52,7 @@ public class Token {
 
         try (FileWriter file = new FileWriter("token.json")) {
             file.write(obj.toJSONString());
+            file.close();
             System.out.println("Successfully Copied JSON Object to File...");
             System.out.println("JSON Object: " + obj);
         } catch (IOException e) {
@@ -91,6 +96,14 @@ public class Token {
             System.out.println("Token deleted successfully.");
         } else {
             System.out.println("Failed to delete the Token.");
+            try {
+                System.out.println("Using another method to delete the Token.");
+                FileDeleteStrategy.FORCE.delete(file);
+                System.out.println("Token deleted successfully.");
+            } catch (IOException e) {
+                System.out.println("Failed to delete the Token :(");
+                e.printStackTrace();
+            }
         }
     }
 
